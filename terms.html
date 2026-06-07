@@ -2,45 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Terms of Service — Process IQ Automation</title>
+  <meta name="description" content="Process IQ Automation — Intelligent · Precise · Automated"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:#111111;color:#F5F5F0;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-    :root{--bg:#111111;--bg-card:#1A1A1A;--emerald:#10B981;--emerald-lt:#6EE7B7;--emerald-dk:#059669;--off-white:#F5F5F0;--grey-mid:#6B7280;--grey-lt:#9CA3AF;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;}
-    nav{position:sticky;top:0;z-index:100;background:rgba(17,17,17,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(16,185,129,.15);}
-    .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:100px;}
-    .nav-logo{display:flex;align-items:center;text-decoration:none;}
-    .nav-logo img{height:90px;width:auto;object-fit:contain;}
-    .nav-links{display:flex;gap:30px;}
-    .nav-links a{font-size:13px;font-weight:500;color:#9CA3AF;text-decoration:none;transition:color .2s;}
-    .nav-links a:hover{color:#10B981;}
-    .btn-primary{background:#10B981;color:#fff;border:none;border-radius:6px;padding:11px 24px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);text-decoration:none;display:inline-block;transition:background .2s,transform .15s;box-shadow:0 2px 16px rgba(16,185,129,.3);}
-    .btn-primary:hover{background:#059669;transform:translateY(-1px);}
-    footer{background:#0D0D0D;border-top:1px solid rgba(16,185,129,.12);padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
-    .footer-brand{display:flex;align-items:center;gap:12px;}
-    .footer-logo{height:36px;width:auto;opacity:.8;}
-    .footer-copy{font-size:12px;color:#6B7280;}
-    .footer-links{display:flex;gap:24px;}
-    .footer-links a{font-size:12px;color:#6B7280;text-decoration:none;transition:color .2s;}
-    .footer-links a:hover{color:#10B981;}
-    .accent-stripe{height:3px;background:linear-gradient(90deg,#059669,#10B981,#6EE7B7);}
-    .container{max-width:900px;margin:0 auto;padding:80px 40px;}
-    h1{font-family:var(--serif);font-size:clamp(28px,4vw,46px);font-weight:600;color:#F5F5F0;margin-bottom:16px;}
-    h2{font-family:var(--serif);font-size:clamp(18px,2.5vw,26px);font-weight:600;color:#10B981;margin:48px 0 14px;}
-    p{font-size:15px;color:#9CA3AF;line-height:1.85;margin-bottom:16px;}
-    ul{list-style:none;padding:0;margin-bottom:16px;}
-    ul li{font-size:14px;color:#9CA3AF;line-height:1.8;padding-left:18px;position:relative;}
-    ul li::before{content:'→';position:absolute;left:0;color:#10B981;font-size:12px;}
-    a.inline{color:#10B981;text-decoration:none;}
-    a.inline:hover{text-decoration:underline;}
-    .page-hero{padding:72px 0 40px;border-bottom:1px solid rgba(16,185,129,.1);margin-bottom:48px;}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:99px;padding:5px 14px;font-size:11px;font-weight:600;color:#6EE7B7;margin-bottom:20px;letter-spacing:.08em;text-transform:uppercase;}
-    @media(max-width:700px){.nav-links{display:none;}.nav-inner{padding:0 20px;}.container{padding:60px 20px;}}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #111111; color: #F5F5F0; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    :root {
+      --bg: #111111; --bg-card: #1A1A1A; --emerald: #10B981;
+      --emerald-lt: #6EE7B7; --emerald-dk: #059669;
+      --off-white: #F5F5F0; --grey-mid: #6B7280; --grey-lt: #9CA3AF;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(17,17,17,.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(16,185,129,.15); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 110px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 100px; width: auto; object-fit: contain; filter: brightness(1.05); }
+    .nav-links { display: flex; gap: 30px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: #9CA3AF; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: #10B981; }
+    .btn-cta { background: #10B981; color: #fff; border: none; border-radius: 6px; padding: 11px 24px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--sans); text-decoration: none; display: inline-block; transition: background .2s, transform .15s; box-shadow: 0 2px 16px rgba(16,185,129,.3); }
+    .btn-cta:hover { background: #059669; transform: translateY(-1px); }
+    /* FOOTER */
+    .accent-stripe { height: 3px; background: linear-gradient(90deg, #059669, #10B981, #6EE7B7); }
+    footer { background: #0D0D0D; border-top: 1px solid rgba(16,185,129,.12); padding: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-logo { height: 36px; width: auto; opacity: .8; }
+    .footer-copy { font-size: 12px; color: #6B7280; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 12px; color: #6B7280; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: #10B981; }
+    /* PAGE CONTENT */
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 72px 40px 100px; }
+    .page-hero { margin-bottom: 52px; }
+    .badge { display: inline-flex; align-items: center; background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.2); border-radius: 99px; padding: 5px 14px; font-size: 11px; font-weight: 700; color: #6EE7B7; margin-bottom: 18px; letter-spacing: .1em; text-transform: uppercase; }
+    h1 { font-family: var(--serif); font-size: clamp(28px,4vw,46px); font-weight: 600; color: #F5F5F0; line-height: 1.2; margin-bottom: 14px; }
+    .page-date { font-size: 13px; color: #6B7280; border-top: 1px solid rgba(16,185,129,.1); padding-top: 16px; margin-top: 16px; }
+    h2 { font-family: var(--serif); font-size: 22px; font-weight: 600; color: #10B981; margin: 44px 0 12px; }
+    p { font-size: 15px; color: #9CA3AF; line-height: 1.9; margin-bottom: 14px; }
+    ul { list-style: none; padding: 0; margin-bottom: 16px; }
+    ul li { font-size: 14px; color: #9CA3AF; line-height: 1.85; padding: 4px 0 4px 22px; position: relative; }
+    ul li::before { content: '→'; position: absolute; left: 0; color: #10B981; font-size: 12px; top: 6px; }
+    a.inline-link { color: #10B981; text-decoration: none; }
+    a.inline-link:hover { text-decoration: underline; }
+    @media(max-width:700px) { .nav-links { display:none; } .nav-inner { padding: 0 20px; height: 90px; } .nav-logo img { height: 76px; } .page-wrap { padding: 48px 20px 80px; } footer { padding: 32px 20px; } }
 </style>
 </head>
 <body>
@@ -55,21 +66,20 @@
         <a href="index.html#case-studies">Results</a>
         <a href="index.html#about">About</a>
       </div>
-      <a href="index.html#consultation" class="btn-primary">Get a Consultation</a>
+      <a href="index.html#consultation" class="btn-cta">Get a Consultation</a>
     </div>
   </nav>
-<div class="container">
+<div class="page-wrap">
   <div class="page-hero">
     <div class="badge">Legal</div>
     <h1>Terms of Service</h1>
-    <p>Last updated: June 7, 2026 &nbsp;·&nbsp; Please read these terms carefully before engaging our services.</p>
+    <p class="page-date">Last updated: June 7, 2026 · Please read these terms carefully before engaging our services.</p>
   </div>
 
   <h2>1. Acceptance of Terms</h2>
   <p>By accessing our website or engaging Process IQ Automation ("Company", "we", "us") for services, you agree to be bound by these Terms of Service. If you do not agree, please do not use our website or services.</p>
 
   <h2>2. Services Provided</h2>
-  <p>Process IQ Automation provides B2B revenue architecture services including but not limited to:</p>
   <ul>
     <li>Salesforce and CRM architecture, implementation, and optimization</li>
     <li>Robotic Process Automation (RPA) design and deployment</li>
@@ -77,35 +87,32 @@
     <li>Email marketing automation and funnel design</li>
     <li>Revenue operations (RevOps) consulting and reporting</li>
   </ul>
-  <p>Specific deliverables, timelines, and investment are defined in individual Statements of Work (SOW) or Master Service Agreements (MSA) agreed upon per engagement.</p>
+  <p>Specific deliverables, timelines, and investment are defined in individual Statements of Work (SOW) or Master Service Agreements (MSA) agreed per engagement.</p>
 
   <h2>3. Consultation Requests</h2>
-  <p>Submitting a consultation request through our website does not constitute a binding agreement. Engagements only commence upon execution of a signed SOW or MSA. We aim to respond to all consultation requests within one business day.</p>
+  <p>Submitting a consultation request does not constitute a binding agreement. Engagements only commence upon execution of a signed SOW or MSA. We aim to respond to all requests within one business day.</p>
 
   <h2>4. Intellectual Property</h2>
-  <p>All website content, including text, design, graphics, and code, is the property of Process IQ Automation and is protected by applicable copyright and intellectual property laws. You may not reproduce, distribute, or use our content without prior written consent.</p>
-  <p>Upon full payment for a client engagement, all custom deliverables produced specifically for that client are assigned to the client, unless otherwise specified in the SOW.</p>
+  <p>All website content — including text, design, graphics, and code — is the property of Process IQ Automation and protected by applicable copyright laws. You may not reproduce or use our content without prior written consent. Upon full payment, custom deliverables produced for a client are assigned to that client unless otherwise specified in the SOW.</p>
 
   <h2>5. Confidentiality</h2>
-  <p>Both parties agree to maintain the confidentiality of any proprietary or sensitive information shared during an engagement. This obligation survives the termination of any service agreement for a period of two (2) years.</p>
+  <p>Both parties agree to maintain confidentiality of any proprietary or sensitive information shared during an engagement. This obligation survives termination of any service agreement for two (2) years.</p>
 
   <h2>6. Limitation of Liability</h2>
-  <p>Process IQ Automation shall not be liable for indirect, incidental, or consequential damages arising from the use of our website or services. Our total liability in connection with any engagement shall not exceed the fees paid by the client for that specific engagement.</p>
+  <p>Process IQ Automation shall not be liable for indirect, incidental, or consequential damages arising from the use of our website or services. Our total liability shall not exceed the fees paid by the client for the specific engagement in question.</p>
 
   <h2>7. No Guarantee of Results</h2>
-  <p>While we benchmark every engagement against revenue outcomes and apply best-in-class methodologies, we do not guarantee specific revenue, ROAS, or pipeline results. Business outcomes depend on numerous factors outside our control.</p>
+  <p>While we benchmark every engagement against revenue outcomes, we do not guarantee specific revenue, ROAS, or pipeline results. Business outcomes depend on numerous factors outside our control.</p>
 
   <h2>8. Governing Law</h2>
-  <p>These Terms are governed by the laws of the Province of Ontario, Canada. Any disputes shall be resolved in the courts of Ontario, or through mutually agreed arbitration.</p>
+  <p>These Terms are governed by the laws of the Province of Ontario, Canada. Disputes shall be resolved in the courts of Ontario, or through mutually agreed arbitration.</p>
 
   <h2>9. Changes to Terms</h2>
-  <p>We may update these Terms periodically. Continued use of our website or services after changes constitutes acceptance of the revised Terms. We will update the "Last updated" date above when changes are made.</p>
+  <p>We may update these Terms periodically. Continued use of our website or services after changes constitutes acceptance of the revised Terms.</p>
 
   <h2>10. Contact</h2>
-  <p>For questions about these Terms, contact us at:<br/>
-  <a class="inline" href="mailto:info@processiqautomation.com">info@processiqautomation.com</a></p>
+  <p><a class="inline-link" href="mailto:info@processiqautomation.com">info@processiqautomation.com</a></p>
 </div>
-
   <div class="accent-stripe"></div>
   <footer>
     <div class="footer-brand">
