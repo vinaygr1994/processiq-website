@@ -181,7 +181,7 @@
     .wwd-section{background:#fff;}
     .wwd-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
     .services-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:3px;background:#e2e8f0;border-radius:4px;overflow:hidden;}
-    .mosaic-card{background:var(--dark2);padding:28px;position:relative;overflow:hidden;cursor:pointer;transition:background .3s;}
+    .mosaic-card{background:var(--dark2);padding:28px;position:relative;overflow:hidden;cursor:pointer;transition:background .3s;text-decoration:none;display:block;}.mosaic-card:focus{outline:2px solid var(--teal-lt);}
     .mosaic-card:hover{background:var(--teal-dk);}
     .mosaic-card.featured{background:var(--teal);grid-column:1;grid-row:2;}
     .mosaic-card.featured:hover{background:var(--teal-dk);}
@@ -423,26 +423,26 @@
       </div>
       <!-- Right mosaic -->
       <div class="services-mosaic fade-up fd2">
-        <div class="mosaic-card">
+        <a href="service-crm.html" class="mosaic-card">
           <div class="mosaic-card-label">CRM Architecture</div>
           <div class="mosaic-card-sub">Salesforce design, implementation & optimization.</div>
           <div class="mosaic-plus">+</div>
-        </div>
-        <div class="mosaic-card">
+        </a>
+        <a href="service-funnels.html" class="mosaic-card">
           <div class="mosaic-card-label">Growth Funnels</div>
           <div class="mosaic-card-sub">Google & Meta Ads with full attribution.</div>
           <div class="mosaic-plus">+</div>
-        </div>
-        <div class="mosaic-card featured">
+        </a>
+        <a href="service-rpa.html" class="mosaic-card featured">
           <div class="mosaic-card-label">RPA Automation</div>
           <div class="mosaic-card-sub">Eliminate manual bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
           <svg style="margin-top:12px;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-        <div class="mosaic-card" style="grid-column:2;grid-row:2;">
+        </a>
+        <a href="service-revops.html" class="mosaic-card" style="grid-column:2;grid-row:2;">
           <div class="mosaic-card-label">Revenue Ops</div>
           <div class="mosaic-card-sub">End-to-end RevOps reporting & pipeline visibility.</div>
           <div class="mosaic-plus">+</div>
-        </div>
+        </a>
         <div class="mosaic-ai-badge">IQ</div>
       </div>
     </div>
