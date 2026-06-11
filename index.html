@@ -311,6 +311,29 @@
       .footer-top{padding:48px 20px;grid-template-columns:1fr;}
       .footer-bottom{padding:20px;}
     }
+  
+    /* ── UST-STYLE ACCORDION CARD DECK ── */
+    .ust-card-deck{display:flex;flex-direction:column;gap:0;border:1px solid #e2e8f0;border-radius:4px;overflow:hidden;}
+    .ust-card{background:#1a2f42;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;transition:background .25s;overflow:hidden;}
+    .ust-card:last-child{border-bottom:none;}
+    .ust-card-top{display:flex;align-items:center;gap:16px;padding:22px 28px;user-select:none;}
+    .ust-card-num{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.12em;min-width:28px;}
+    .ust-card-title{font-size:17px;font-weight:700;color:#e2e8f0;flex:1;transition:color .2s;}
+    .ust-card-arrow{width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:border-color .2s,color .2s,transform .25s;flex-shrink:0;}
+    .ust-card:hover .ust-card-arrow,.ust-card.active .ust-card-arrow{border-color:var(--teal-lt);color:var(--teal-lt);}
+    .ust-card.active .ust-card-arrow{transform:rotate(45deg);}
+    .ust-card-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .3s;}
+    .ust-card-body p{font-size:14px;color:#94a3b8;line-height:1.75;padding:0 28px;margin-bottom:0;}
+    .ust-card-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--teal-lt);text-decoration:none;padding:16px 28px 22px;transition:gap .2s;}
+    .ust-card-link:hover{gap:12px;}
+    .ust-card.active{background:var(--teal);}
+    .ust-card.active .ust-card-title{color:#fff;}
+    .ust-card.active .ust-card-num{color:rgba(255,255,255,.5);}
+    .ust-card.active .ust-card-body{max-height:200px;}
+    .ust-card.active .ust-card-body p{color:rgba(255,255,255,.85);}
+    .ust-card.active .ust-card-link{color:#fff;}
+    .ust-card:not(.active):hover{background:#243548;}
+
   </style>
 </head>
 <body>
@@ -428,28 +451,48 @@
         </a>
       </div>
       <!-- Right mosaic -->
-      <div class="services-mosaic fade-up fd2">
-        <a href="service-crm.html" class="mosaic-card">
-          <div class="mosaic-card-label">CRM Architecture</div>
-          <div class="mosaic-card-sub">Salesforce design, implementation &amp; optimization.</div>
-          <span class="mosaic-plus">→</span>
-        </a>
-        <a href="service-funnels.html" class="mosaic-card">
-          <div class="mosaic-card-label">Growth Funnels</div>
-          <div class="mosaic-card-sub">Google &amp; Meta Ads with full attribution.</div>
-          <span class="mosaic-plus">→</span>
-        </a>
-        <a href="service-rpa.html" class="mosaic-card featured">
-          <div class="mosaic-card-label">RPA Automation</div>
-          <div class="mosaic-card-sub">Eliminate manual bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
-          <span style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;font-weight:600;color:#fff;">Learn more →</span>
-        </a>
-        <a href="service-revops.html" class="mosaic-card" style="grid-column:2;grid-row:2;">
-          <div class="mosaic-card-label">Revenue Ops</div>
-          <div class="mosaic-card-sub">End-to-end RevOps reporting &amp; pipeline visibility.</div>
-          <span class="mosaic-plus">→</span>
-        </a>
-        <div class="mosaic-ai-badge" style="pointer-events:none;z-index:0;">IQ</div>
+      <!-- UST-style expandable card deck -->
+      <div class="ust-card-deck fade-up fd2">
+        <div class="ust-card active" data-href="service-crm.html">
+          <div class="ust-card-top">
+            <div class="ust-card-num">01</div>
+            <div class="ust-card-title">CRM Architecture</div>
+          </div>
+          <div class="ust-card-body">
+            <p>Salesforce design, implementation &amp; optimization. Full pipeline visibility from first touch to closed-won, with 98% data accuracy.</p>
+            <a href="service-crm.html" class="ust-card-link">Explore CRM Architecture <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="ust-card" data-href="service-funnels.html">
+          <div class="ust-card-top">
+            <div class="ust-card-num">02</div>
+            <div class="ust-card-title">Growth Funnels</div>
+          </div>
+          <div class="ust-card-body">
+            <p>Google &amp; Meta Ads architecture with full CRM attribution modelling — 3.1× average ROAS lift, every ad dollar accountable.</p>
+            <a href="service-funnels.html" class="ust-card-link">Explore Growth Funnels <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="ust-card" data-href="service-rpa.html">
+          <div class="ust-card-top">
+            <div class="ust-card-num">03</div>
+            <div class="ust-card-title">RPA Automation</div>
+          </div>
+          <div class="ust-card-body">
+            <p>Eliminate manual bottlenecks across your entire stack — from lead routing to compliance reporting. 78% manual ops replaced.</p>
+            <a href="service-rpa.html" class="ust-card-link">Explore RPA Automation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="ust-card" data-href="service-revops.html">
+          <div class="ust-card-top">
+            <div class="ust-card-num">04</div>
+            <div class="ust-card-title">Revenue Ops</div>
+          </div>
+          <div class="ust-card-body">
+            <p>End-to-end RevOps reporting &amp; pipeline visibility. One revenue view, zero blind spots — −55% reporting overhead.</p>
+            <a href="service-revops.html" class="ust-card-link">Explore Revenue Ops <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -762,6 +805,24 @@
   function toggleMobileMenu() {
     alert('Mobile menu — connect your preferred mobile nav here.');
   }
+
+  // UST accordion cards
+  document.querySelectorAll('.ust-card').forEach(card => {
+    const top = card.querySelector('.ust-card-top');
+    // Add arrow icon to top
+    if(!card.querySelector('.ust-card-arrow')){
+      const arr = document.createElement('div');
+      arr.className = 'ust-card-arrow';
+      arr.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+      top.appendChild(arr);
+    }
+    top.addEventListener('click', () => {
+      const isActive = card.classList.contains('active');
+      document.querySelectorAll('.ust-card').forEach(c => c.classList.remove('active'));
+      if(!isActive) card.classList.add('active');
+    });
+  });
+
 </script>
 </body>
 </html>
