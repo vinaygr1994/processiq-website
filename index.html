@@ -285,27 +285,32 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 }
 
 
-    /* ══ UST MOSAIC EXACT v5 ══ */
+    /* ══ UST MOSAIC PIXEL-PERFECT v6 ══ */
     .um-outer { padding: 96px 0; background: #fff; }
     .um-wrap {
       max-width: 1300px; margin: 0 auto; padding: 0 48px;
       display: grid;
-      grid-template-columns: 1fr 1.05fr;
+      grid-template-columns: 1fr 1fr;
       gap: 72px;
       align-items: center;
     }
 
-    /* Outer mosaic container — white background, cards float */
+    /* Container — exact pixel layout matching UST image */
     .um-grid {
       position: relative;
+      /* Total width: 510 + 14 + 290 = 814px
+         Total height: 290 + 14 + 520 = 824px */
+      width: 100%;
+      max-width: 580px;
+      aspect-ratio: auto;
       display: grid;
-      grid-template-columns: 1fr 0.82fr;
-      gap: 12px;
+      /* col widths proportional: big=510, gap=14, small=290 → ratio ~1.75:1 */
+      grid-template-columns: 1.75fr 1fr;
+      /* row heights: top=290, gap=14, bottom=520 → ratio ~0.56:1 */
+      grid-template-rows: 290px 520px;
+      gap: 14px;
       background: transparent;
-      /* row heights: top row = fixed small squares, bottom row = tall */
-      grid-template-rows: 220px 1fr;
-      /* total height */
-      min-height: 580px;
+      margin-left: auto;
     }
 
     /* ── BASE CARD ── */
@@ -313,41 +318,36 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: 3px;
       transition: box-shadow .3s;
     }
-    .um-card:hover {
-      box-shadow: 0 12px 40px rgba(0,0,0,.18);
-    }
+    .um-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,.2); }
 
-    /* background gradient */
     .um-bg {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
       transition: transform .55s cubic-bezier(.25,.46,.45,.94);
-      z-index: 0; border-radius: 4px;
     }
     .um-card:hover .um-bg { transform: scale(1.04); }
 
-    /* ── SMALL card content: title bottom-left, + bottom-right ── */
+    /* ── SMALL card: title bottom-left, + bottom-right ── */
     .um-small {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
       justify-content: flex-end;
-      padding: 0 0 20px 20px;
+      padding: 0 0 18px 18px;
       z-index: 2;
       transition: opacity .3s;
     }
     .um-small-title {
-      font-size: 17px; font-weight: 600; color: #fff;
-      line-height: 1.3;
-      text-shadow: 0 1px 8px rgba(0,0,0,.45);
-      max-width: 80%;
+      font-size: 16px; font-weight: 600; color: #fff;
+      line-height: 1.25;
+      text-shadow: 0 1px 6px rgba(0,0,0,.5);
     }
     .um-plus {
-      position: absolute; bottom: 16px; right: 18px;
-      width: 32px; height: 32px; border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,.55);
+      position: absolute; bottom: 14px; right: 16px;
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.6);
       display: flex; align-items: center; justify-content: center;
       color: rgba(255,255,255,.8);
       font-size: 22px; font-weight: 300; line-height: 0;
@@ -355,13 +355,13 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       transition: all .3s;
     }
 
-    /* ── EXPANDED content: photo top + teal panel bottom ── */
+    /* ── BIG card: photo top + teal panel bottom ── */
     .um-expanded {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
       z-index: 2;
       opacity: 0; pointer-events: none;
-      transition: opacity .35s;
+      transition: opacity .3s;
     }
     .um-exp-photo {
       flex: 1; position: relative; overflow: hidden;
@@ -379,24 +379,23 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
     }
     .um-exp-title {
       font-family: var(--serif);
-      font-size: 21px; font-weight: 600; color: #fff;
+      font-size: 22px; font-weight: 600; color: #fff;
       line-height: 1.2; margin-bottom: 10px;
     }
     .um-exp-desc {
-      font-size: 14px; color: rgba(255,255,255,.88);
-      line-height: 1.65; font-weight: 600;
-      margin-bottom: 14px;
+      font-size: 14px; font-weight: 700;
+      color: rgba(255,255,255,.9);
+      line-height: 1.6; margin-bottom: 14px;
     }
     .um-exp-link {
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex; align-items: center; gap: 4px;
       color: #fff; text-decoration: none;
-      font-size: 15px; font-weight: 400;
+      font-size: 22px; font-weight: 300;
       transition: gap .2s;
     }
-    .um-exp-link:hover { gap: 12px; }
-    .um-exp-link svg { flex-shrink: 0; }
+    .um-exp-link:hover { gap: 8px; }
 
-    /* ── ACTIVE STATE ── */
+    /* ── ACTIVE ── */
     .um-card.um-active .um-small    { opacity: 0; pointer-events: none; }
     .um-card.um-active .um-expanded { opacity: 1; pointer-events: all; }
     .um-card.um-active .um-plus {
@@ -405,40 +404,60 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       background: rgba(255,255,255,.15);
     }
 
-    /* ── GRID PLACEMENT ── */
+    /* ── GRID POSITIONS ── */
+    /* TOP-LEFT small: sits in col2, row1  (right-aligned like UST) */
     #um-c1 { grid-column: 1; grid-row: 1; }
+    /* TOP-RIGHT small: col2, row1 */
     #um-c2 { grid-column: 2; grid-row: 1; }
+    /* BOTTOM-LEFT big: col1, row2 */
     #um-c3 { grid-column: 1; grid-row: 2; }
+    /* BOTTOM-RIGHT small: col2, row2 */
     #um-c4 { grid-column: 2; grid-row: 2; }
 
-    /* IQ badge — floats at intersection of all 4 cards */
+    /* IQ badge at the 4-corner intersection */
     .um-badge {
       position: absolute;
-      top: 220px; left: 50%;
+      /* horizontally: at the gap between col1 and col2
+         = col1 fraction × total width
+         grid col ratio 1.75:1, so col1 = 1.75/2.75 = 63.6% */
+      left: calc(63.6% + 7px);   /* center of the 14px gap */
+      /* vertically: at gap between row1 (290px) and row2
+         = (290 + 7) / total_height … approximate 35% */
+      top: 290px;
       transform: translate(-50%, -50%);
       background: #fff;
       color: var(--dark);
       font-family: var(--serif);
-      font-size: 22px; font-weight: 800;
-      width: 62px; height: 62px;
+      font-size: 26px; font-weight: 800;
+      width: 74px; height: 74px;
       border-radius: 3px;
       display: flex; align-items: center; justify-content: center;
       z-index: 20;
-      box-shadow: 0 2px 16px rgba(0,0,0,.12);
+      box-shadow: 0 2px 20px rgba(0,0,0,.1);
       pointer-events: none;
       letter-spacing: -1px;
     }
 
-    @media(max-width:900px){
-      .um-wrap { grid-template-columns: 1fr; }
-      .um-grid { grid-template-rows: 180px 1fr; min-height: 500px; }
-      .um-badge { top: 180px; }
+    /* When a top card becomes big, its row expands */
+    .um-grid.top-active {
+      grid-template-rows: 520px 290px;
     }
-    @media(max-width:560px){
+    .um-grid.top-active .um-badge {
+      top: 520px;
+    }
+
+    @media(max-width:1100px){
+      .um-wrap { grid-template-columns: 1fr; }
+      .um-grid { max-width: 500px; grid-template-rows: 240px 440px; }
+      .um-badge { top: 240px; }
+      .um-grid.top-active { grid-template-rows: 440px 240px; }
+      .um-grid.top-active .um-badge { top: 440px; }
+    }
+    @media(max-width:600px){
       .um-grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 160px 320px;
-        min-height: auto;
+        grid-template-rows: 180px 340px;
+        max-width: 100%;
       }
       #um-c3 { grid-column: 1 / 3; }
       #um-c4 { display: none; }
@@ -581,7 +600,7 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 <section class="um-outer" id="services">
   <div class="um-wrap">
 
-    <!-- LEFT text -->
+    <!-- LEFT: text -->
     <div>
       <div class="sec-label fade-up">Process IQ</div>
       <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(30px,3.5vw,54px);line-height:1.05;margin-bottom:22px;font-weight:700;">
@@ -590,24 +609,29 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       <p class="sec-sub fade-up fd2">
         From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.
       </p>
-      <a href="/contact" style="display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--dark);border-radius:2px;padding:13px 22px;font-size:14px;font-weight:500;color:var(--dark);text-decoration:none;margin-top:8px;transition:border-color .2s,color .2s;" class="fade-up fd3" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'" onmouseout="this.style.borderColor='var(--dark)';this.style.color='var(--dark)'">
+      <a href="/contact"
+         style="display:inline-flex;align-items:center;gap:10px;border:1.5px solid #1a2332;border-radius:2px;padding:13px 22px;font-size:14px;font-weight:500;color:#1a2332;text-decoration:none;margin-top:8px;transition:all .2s;"
+         class="fade-up fd3"
+         onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'"
+         onmouseout="this.style.borderColor='#1a2332';this.style.color='#1a2332'">
         Explore our solutions
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
 
-    <!-- RIGHT: mosaic — exact image 2 layout -->
+    <!-- RIGHT: mosaic -->
     <div class="um-grid fade-up fd2" id="um-grid">
 
-      <!-- TOP-LEFT: CRM Architecture (small square) -->
-      <div class="um-card" id="um-c1" data-idx="0" tabindex="0" role="button" aria-label="CRM Architecture">
-        <div class="um-bg" style="background:linear-gradient(160deg,#0d1f2e 0%,#0a3850 40%,#0a5870 100%);"></div>
+      <!-- TOP-LEFT: CRM Architecture -->
+      <div class="um-card" id="um-c1" data-idx="0" tabindex="0" role="button">
+        <div class="um-bg" style="background:linear-gradient(160deg,#0c1e2c 0%,#0a3650 45%,#0a5472 100%);"></div>
         <div class="um-small">
           <div class="um-small-title">CRM Architecture</div>
         </div>
         <div class="um-expanded">
           <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#0a1e2c 0%,#0a4260 45%,#0a6882 100%);"></div>
+            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#0a1e2c 0%,#0a4060 45%,#0a6682 100%);"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,124,140,.3) 100%);"></div>
           </div>
           <div class="um-exp-panel">
             <div class="um-exp-title">CRM Architecture</div>
@@ -618,15 +642,16 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         <div class="um-plus">+</div>
       </div>
 
-      <!-- TOP-RIGHT: Growth Funnels (small square) -->
-      <div class="um-card" id="um-c2" data-idx="1" tabindex="0" role="button" aria-label="Growth Funnels">
-        <div class="um-bg" style="background:linear-gradient(160deg,#053540 0%,#087080 40%,#0a9aad 100%);"></div>
+      <!-- TOP-RIGHT: Growth Funnels -->
+      <div class="um-card" id="um-c2" data-idx="1" tabindex="0" role="button">
+        <div class="um-bg" style="background:linear-gradient(160deg,#052e3a 0%,#086878 45%,#0a96aa 100%);"></div>
         <div class="um-small">
           <div class="um-small-title">Growth Funnels</div>
         </div>
         <div class="um-expanded">
           <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#042830 0%,#086070 45%,#0a8a9e 100%);"></div>
+            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#04262e 0%,#075e6c 45%,#0a8899 100%);"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,124,140,.3) 100%);"></div>
           </div>
           <div class="um-exp-panel">
             <div class="um-exp-title">Growth Funnels</div>
@@ -637,18 +662,18 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         <div class="um-plus">+</div>
       </div>
 
-      <!-- BOTTOM-LEFT: RPA Automation — BIG active card (photo + teal panel) -->
-      <div class="um-card um-active" id="um-c3" data-idx="2" tabindex="0" role="button" aria-label="RPA Automation">
+      <!-- BOTTOM-LEFT: RPA Automation — BIG by default -->
+      <div class="um-card um-active" id="um-c3" data-idx="2" tabindex="0" role="button">
         <div class="um-bg" style="background:linear-gradient(160deg,#054f58 0%,#0a7080 45%,#0d90a2 100%);"></div>
         <div class="um-small">
           <div class="um-small-title">RPA Automation</div>
         </div>
         <div class="um-expanded">
           <div class="um-exp-photo">
-            <!-- Simulated photo with a subtle grid/circuit pattern overlay -->
             <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#065868 0%,#0a8090 40%,#0daabf 100%);"></div>
-            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:32px 32px;"></div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,124,140,.4) 100%);"></div>
+            <!-- Subtle texture to simulate photo -->
+            <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 30% 40%,rgba(255,255,255,.08) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(10,124,140,.15) 0%,transparent 50%);"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,124,140,.35) 100%);"></div>
           </div>
           <div class="um-exp-panel">
             <div class="um-exp-title">RPA Automation</div>
@@ -659,15 +684,16 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         <div class="um-plus">+</div>
       </div>
 
-      <!-- BOTTOM-RIGHT: Revenue Ops (same height as bottom-left, narrower) -->
-      <div class="um-card" id="um-c4" data-idx="3" tabindex="0" role="button" aria-label="Revenue Ops">
-        <div class="um-bg" style="background:linear-gradient(160deg,#142838 0%,#0d3848 45%,#0a4e65 100%);"></div>
+      <!-- BOTTOM-RIGHT: Revenue Ops — small, same height as big -->
+      <div class="um-card" id="um-c4" data-idx="3" tabindex="0" role="button">
+        <div class="um-bg" style="background:linear-gradient(160deg,#0a566a 0%,#0a7080 45%,#0a8e9e 100%);"></div>
         <div class="um-small">
           <div class="um-small-title">Revenue Ops</div>
         </div>
         <div class="um-expanded">
           <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#0e2235 0%,#0a3248 45%,#0a4860 100%);"></div>
+            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#094e60 0%,#0a6878 45%,#0a8898 100%);"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,124,140,.3) 100%);"></div>
           </div>
           <div class="um-exp-panel">
             <div class="um-exp-title">Revenue Ops</div>
@@ -678,7 +704,7 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         <div class="um-plus">+</div>
       </div>
 
-      <!-- IQ badge at the intersection -->
+      <!-- IQ badge -->
       <div class="um-badge">IQ</div>
 
     </div>
@@ -950,20 +976,35 @@ function handleSubmit(btn) {
     btn.style.background = '#047857';
   }, 1200);
 }
-// ── UST MOSAIC v5: one card expanded, others stay small ────────────────
+// ══ UST MOSAIC v6: 3 small + 1 big, click to swap big card ══════════
   (function() {
     const grid = document.getElementById('um-grid');
     if (!grid) return;
     const cards = Array.from(grid.querySelectorAll('.um-card'));
+    const badge = grid.querySelector('.um-badge');
 
-    // Row heights
-    // TOP row: always fixed small (220px)
-    // BOTTOM row: always fills remaining space (flex)
-    // The ACTIVE card within a row shows expanded content
-    // When top card is active: its row needs to be taller
-    // Key insight from image: top row is SMALL squares, bottom row is TALL
-    // So we keep top row fixed at 220px always, bottom row at 1fr always
-    // The "expansion" is purely about which card shows photo+panel vs title only
+    // Default row heights (bottom big)
+    const ROWS_BOTTOM_BIG = '290px 520px';
+    const ROWS_TOP_BIG    = '520px 290px';
+    const BADGE_TOP_DEFAULT = '290px';
+    const BADGE_TOP_TOPBIG  = '520px';
+
+    // Responsive heights
+    function getHeights() {
+      const w = grid.offsetWidth;
+      if (w < 400) return { small: 160, big: 320 };
+      if (w < 500) return { small: 200, big: 380 };
+      return { small: 290, big: 520 };
+    }
+
+    function applyLayout(activeIdx) {
+      const { small, big } = getHeights();
+      const isTop = activeIdx === 0 || activeIdx === 1;
+      const row1 = isTop ? big : small;
+      const row2 = isTop ? small : big;
+      grid.style.gridTemplateRows = `${row1}px ${row2}px`;
+      if (badge) badge.style.top = `${row1}px`;
+    }
 
     function setActive(card) {
       cards.forEach(c => {
@@ -973,16 +1014,7 @@ function handleSubmit(btn) {
       if (card) {
         card.classList.add('um-active');
         card.querySelector('.um-plus').textContent = '×';
-      }
-
-      // If active card is in TOP row (idx 0 or 1),
-      // grow top row so the expanded content is visible
-      const idx = card ? parseInt(card.dataset.idx) : -1;
-      if (idx === 0 || idx === 1) {
-        grid.style.gridTemplateRows = '360px 1fr';
-      } else {
-        // bottom card active or no active: top row stays small
-        grid.style.gridTemplateRows = '220px 1fr';
+        applyLayout(parseInt(card.dataset.idx));
       }
     }
 
@@ -990,15 +1022,22 @@ function handleSubmit(btn) {
       card.addEventListener('click', function(e) {
         if (e.target.closest('.um-exp-link')) return;
         const wasActive = this.classList.contains('um-active');
-        setActive(wasActive ? null : this);
+        if (!wasActive) setActive(this);
+        // don't allow deactivating — always one card big
       });
       card.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
       });
     });
 
-    // Default: card 3 (bottom-left, RPA) active
+    // Init: RPA (idx 2, bottom-left) is the big card
     setActive(document.getElementById('um-c3'));
+
+    // Re-apply on resize
+    window.addEventListener('resize', () => {
+      const active = grid.querySelector('.um-active');
+      if (active) applyLayout(parseInt(active.dataset.idx));
+    });
   })();
 
 </script>
