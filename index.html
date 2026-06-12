@@ -284,117 +284,150 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
   .footer-bottom{padding:16px 24px;}
 }
 
-    /* ── PIQ MOSAIC ── */
-    .piq-mosaic{
+    /* ── UST-STYLE CLICK-EXPAND MOSAIC ── */
+    .ust-mosaic-wrap{
       display:grid;
       grid-template-columns:1fr 1fr;
-      grid-template-rows:220px 240px;
-      gap:4px;
+      grid-template-rows:280px 280px;
+      gap:3px;
+      background:#cdd5de;
       position:relative;
     }
-    /* Each tile */
-    .piq-tile{
-      display:block;text-decoration:none;
-      position:relative;overflow:hidden;
-      background:var(--dark2);
+    /* Each card */
+    .ust-mc{
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+      text-decoration:none;
+      display:block;
+      transition:grid-row .4s;
     }
-    /* Tile inner — default state */
-    .piq-tile-inner{
-      position:absolute;inset:0;padding:22px 24px;
-      display:flex;flex-direction:column;justify-content:flex-end;
-      z-index:2;transition:opacity .3s;
+    /* Background gradient + pseudo-image effect */
+    .ust-mc::before{
+      content:'';
+      position:absolute;inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:transform .5s cubic-bezier(.25,.46,.45,.94);
     }
-    .piq-tile-num{
+    .ust-mc:hover::before{ transform:scale(1.04); }
+    /* Dark scrim */
+    .ust-mc::after{
+      content:'';
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(13,27,42,.1) 0%,rgba(13,27,42,.65) 100%);
+      transition:opacity .3s;
+    }
+    /* Default content — title + plus at bottom */
+    .ust-mc-default{
+      position:absolute;inset:0;
+      padding:24px 26px;
+      display:flex;flex-direction:column;
+      justify-content:flex-end;
+      z-index:3;
+      transition:opacity .3s, transform .3s;
+    }
+    .ust-mc-tag{
       font-size:10px;font-weight:800;letter-spacing:.18em;
-      text-transform:uppercase;color:rgba(255,255,255,.35);
+      text-transform:uppercase;color:rgba(255,255,255,.5);
       margin-bottom:8px;
     }
-    .piq-tile-name{
-      font-size:17px;font-weight:700;color:#fff;
-      margin-bottom:7px;line-height:1.25;
+    .ust-mc-title{
+      font-size:18px;font-weight:700;color:#fff;line-height:1.25;
     }
-    .piq-tile-sub{
-      font-size:12px;color:rgba(255,255,255,.55);
-      line-height:1.6;max-width:90%;
-    }
-    .piq-tile-icon{
-      position:absolute;bottom:16px;right:18px;
-      width:28px;height:28px;border-radius:50%;
-      border:1.5px solid rgba(255,255,255,.25);
+    .ust-mc-plus{
+      position:absolute;bottom:18px;right:20px;
+      width:32px;height:32px;
+      border:1.5px solid rgba(255,255,255,.4);
+      border-radius:50%;
       display:flex;align-items:center;justify-content:center;
-      color:rgba(255,255,255,.4);font-size:18px;font-weight:300;
-      transition:all .3s;
+      color:rgba(255,255,255,.6);
+      font-size:20px;font-weight:300;
+      line-height:1;
+      z-index:4;
+      transition:all .3s cubic-bezier(.4,0,.2,1);
     }
-    .piq-tile-cta-row{
-      display:inline-flex;align-items:center;gap:7px;
-      margin-top:14px;font-size:13px;font-weight:700;color:#fff;
-      opacity:.85;
-    }
-    /* Hover overlay */
-    .piq-tile-hover{
-      position:absolute;inset:0;padding:22px 24px;
-      display:flex;flex-direction:column;justify-content:flex-end;
-      background:rgba(10,124,140,.96);
+    /* Expanded content — hidden by default */
+    .ust-mc-expanded{
+      position:absolute;inset:0;
+      padding:28px 28px 24px;
+      display:flex;flex-direction:column;
+      justify-content:flex-end;
       z-index:3;
       opacity:0;
-      transform:translateY(8px);
-      transition:opacity .3s,transform .3s;
+      pointer-events:none;
+      transition:opacity .3s;
     }
-    .piq-tile:hover .piq-tile-inner{opacity:0;}
-    .piq-tile:hover .piq-tile-hover{opacity:1;transform:translateY(0);}
-    .piq-tile:hover .piq-tile-icon{
-      transform:rotate(45deg);
-      border-color:rgba(255,255,255,.7);
-      color:#fff;
+    .ust-mc-exp-title{
+      font-family:var(--serif);
+      font-size:20px;font-weight:600;color:#fff;
+      line-height:1.2;margin-bottom:12px;
     }
-    .piq-hover-title{
-      font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;
+    .ust-mc-exp-desc{
+      font-size:14px;color:rgba(255,255,255,.82);
+      line-height:1.7;margin-bottom:18px;
+      max-width:300px;
     }
-    .piq-hover-desc{
-      font-size:13px;color:rgba(255,255,255,.85);line-height:1.65;margin-bottom:14px;
-    }
-    .piq-hover-cta{
-      display:inline-flex;align-items:center;gap:7px;
+    .ust-mc-exp-link{
+      display:inline-flex;align-items:center;gap:8px;
       font-size:13px;font-weight:700;color:#fff;
       border-bottom:1.5px solid rgba(255,255,255,.5);
-      padding-bottom:2px;
+      padding-bottom:3px;
+      text-decoration:none;
+      transition:gap .2s,border-color .2s;
     }
-    /* Tile colours */
-    .piq-t1{background:linear-gradient(150deg,#0d2233 0%,#0a3d50 100%);}
-    .piq-t2{background:linear-gradient(150deg,#072830 0%,#0a5c6e 100%);}
-    .piq-t3{background:linear-gradient(150deg,#065f6b 0%,#0a7c8c 100%);}
-    .piq-t4{background:linear-gradient(150deg,#1a2f42 0%,#0d3a52 100%);}
-    /* Featured tile — teal, with lighter hover */
-    .piq-featured .piq-tile-sub{color:rgba(255,255,255,.8);}
-    .piq-featured .piq-tile-num{color:rgba(255,255,255,.5);}
-    .piq-hover-invert{background:rgba(6,95,107,.97);}
-    /* IQ badge exactly at the 4-corner intersection */
-    .piq-badge{
+    .ust-mc-exp-link:hover{ gap:12px; border-color:#fff; }
+    /* ── ACTIVE STATE ── */
+    .ust-mc.ust-active::after{
+      background:linear-gradient(180deg,rgba(6,95,107,.55) 0%,rgba(6,95,107,.92) 100%);
+    }
+    .ust-mc.ust-active .ust-mc-default{
+      opacity:0;pointer-events:none;
+    }
+    .ust-mc.ust-active .ust-mc-expanded{
+      opacity:1;pointer-events:all;
+    }
+    .ust-mc.ust-active .ust-mc-plus{
+      transform:rotate(45deg);
+      border-color:rgba(255,255,255,.8);
+      color:#fff;
+      background:rgba(255,255,255,.15);
+    }
+    /* IQ badge at the 4-corner intersection */
+    .ust-iq-badge{
       position:absolute;
-      top:220px;left:50%;
+      /* sits exactly where row1 meets row2, col1 meets col2 */
+      top:calc(280px + 1.5px); /* row height + half gap */
+      left:50%;
       transform:translate(-50%,-50%);
       background:#fff;
       color:var(--dark);
       font-family:var(--serif);
-      font-size:19px;font-weight:700;
-      width:52px;height:52px;
+      font-size:20px;font-weight:700;
+      width:56px;height:56px;
       border-radius:2px;
       display:flex;align-items:center;justify-content:center;
-      z-index:20;
-      box-shadow:0 2px 16px rgba(0,0,0,.15),0 0 0 4px #fff;
+      z-index:10;
+      box-shadow:0 4px 20px rgba(0,0,0,.12);
       pointer-events:none;
       letter-spacing:-.5px;
     }
-    @media(max-width:900px){
-      .piq-mosaic{grid-template-rows:180px 180px;}
-      .piq-tile-name{font-size:15px;}
-      .piq-badge{top:180px;}
+    /* Tile backgrounds */
+    .ust-mc-1::before{ background:linear-gradient(155deg,#0d2233,#0a3d52,#0a5c70); }
+    .ust-mc-2::before{ background:linear-gradient(155deg,#072830,#085060,#0a7c8c); }
+    .ust-mc-3::before{ background:linear-gradient(155deg,#065f6b,#0a7c8c,#12a8bc); }
+    .ust-mc-4::before{ background:linear-gradient(155deg,#1a2f42,#0d3a52,#0a4a60); }
+    @media(max-width:768px){
+      .ust-mosaic-wrap{grid-template-rows:200px 200px;}
+      .ust-iq-badge{top:calc(200px + 1.5px);}
+      .ust-mc-title{font-size:15px;}
+      .ust-mc-exp-title{font-size:17px;}
+      .ust-mc-exp-desc{font-size:13px;}
     }
-    @media(max-width:600px){
-      .piq-mosaic{grid-template-columns:1fr;grid-template-rows:repeat(4,150px);}
-      .piq-badge{display:none;}
+    @media(max-width:520px){
+      .ust-mosaic-wrap{grid-template-columns:1fr;grid-template-rows:repeat(4,180px);}
+      .ust-iq-badge{display:none;}
     }
-
   </style>
 </head>
 <body>
@@ -531,9 +564,9 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 ══════════════════════════════════════════ -->
 <section class="wwd-section" id="services">
   <div style="max-width:1300px;margin:0 auto;padding:96px 48px;">
-    <div style="display:grid;grid-template-columns:1fr 1.08fr;gap:72px;align-items:center;">
+    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center;">
 
-      <!-- LEFT: text -->
+      <!-- LEFT -->
       <div>
         <div class="sec-label fade-up">Process IQ</div>
         <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(30px,3.2vw,50px);line-height:1.1;margin-bottom:20px;">Built on Automation.<br/>Designed for impact.</h2>
@@ -541,71 +574,69 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         <a href="/contact" class="btn-outline-teal fade-up fd3">Explore our solutions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
 
-      <!-- RIGHT: 2×2 mosaic -->
-      <div class="piq-mosaic fade-up fd2">
+      <!-- RIGHT: UST-style 2×2 click-expand mosaic -->
+      <div class="ust-mosaic-wrap fade-up fd2" id="ust-mosaic">
 
-        <!-- Row 1 -->
-        <a href="/service-crm" class="piq-tile piq-t1">
-          <div class="piq-tile-inner">
-            <div class="piq-tile-num">01</div>
-            <div class="piq-tile-name">CRM Architecture</div>
-            <div class="piq-tile-sub">Salesforce design, implementation &amp; optimization.</div>
-            <div class="piq-tile-icon">+</div>
+        <!-- Card 1: CRM Architecture -->
+        <div class="ust-mc ust-mc-1 ust-active" data-href="/service-crm" tabindex="0" role="button" aria-label="CRM Architecture">
+          <div class="ust-mc-default">
+            <div class="ust-mc-tag">Salesforce · CRM</div>
+            <div class="ust-mc-title">CRM Architecture</div>
           </div>
-          <div class="piq-tile-hover">
-            <div class="piq-hover-title">CRM Architecture</div>
-            <div class="piq-hover-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos.</div>
-            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          <div class="ust-mc-expanded">
+            <div class="ust-mc-exp-title">CRM Architecture</div>
+            <div class="ust-mc-exp-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos, every deal tracked.</div>
+            <a href="/service-crm" class="ust-mc-exp-link">Explore CRM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
-        </a>
+          <div class="ust-mc-plus">+</div>
+        </div>
 
-        <a href="/service-funnels" class="piq-tile piq-t2">
-          <div class="piq-tile-inner">
-            <div class="piq-tile-num">02</div>
-            <div class="piq-tile-name">Growth Funnels</div>
-            <div class="piq-tile-sub">Google &amp; Meta Ads with full attribution.</div>
-            <div class="piq-tile-icon">+</div>
+        <!-- Card 2: Growth Funnels -->
+        <div class="ust-mc ust-mc-2" data-href="/service-funnels" tabindex="0" role="button" aria-label="Growth Funnels">
+          <div class="ust-mc-default">
+            <div class="ust-mc-tag">Google · Meta Ads</div>
+            <div class="ust-mc-title">Growth Funnels</div>
           </div>
-          <div class="piq-tile-hover">
-            <div class="piq-hover-title">Growth Funnels</div>
-            <div class="piq-hover-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue in your CRM.</div>
-            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          <div class="ust-mc-expanded">
+            <div class="ust-mc-exp-title">Growth Funnels</div>
+            <div class="ust-mc-exp-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue in your CRM. Full attribution modelling.</div>
+            <a href="/service-funnels" class="ust-mc-exp-link">Explore Funnels <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
-        </a>
+          <div class="ust-mc-plus">+</div>
+        </div>
 
-        <!-- Row 2 — featured (teal) + dark -->
-        <a href="/service-rpa" class="piq-tile piq-t3 piq-featured">
-          <div class="piq-tile-inner">
-            <div class="piq-tile-num">03</div>
-            <div class="piq-tile-name">RPA Automation</div>
-            <div class="piq-tile-sub">Eliminate manual bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
-            <div class="piq-tile-cta-row">Explore <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <!-- Card 3: RPA Automation -->
+        <div class="ust-mc ust-mc-3" data-href="/service-rpa" tabindex="0" role="button" aria-label="RPA Automation">
+          <div class="ust-mc-default">
+            <div class="ust-mc-tag">Automation · RPA</div>
+            <div class="ust-mc-title">RPA Automation</div>
           </div>
-          <div class="piq-tile-hover piq-hover-invert">
-            <div class="piq-hover-title">RPA Automation</div>
-            <div class="piq-hover-desc">78% of manual ops replaced. 142 automations live. 4.2× deal cycle speed.</div>
-            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          <div class="ust-mc-expanded">
+            <div class="ust-mc-exp-title">RPA Automation</div>
+            <div class="ust-mc-exp-desc">78% of manual ops replaced. Eliminate bottlenecks from lead routing to compliance — 142 workflows live.</div>
+            <a href="/service-rpa" class="ust-mc-exp-link">Explore RPA <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
-        </a>
+          <div class="ust-mc-plus">+</div>
+        </div>
 
-        <a href="/service-revops" class="piq-tile piq-t4">
-          <div class="piq-tile-inner">
-            <div class="piq-tile-num">04</div>
-            <div class="piq-tile-name">Revenue Ops</div>
-            <div class="piq-tile-sub">End-to-end RevOps reporting &amp; pipeline visibility.</div>
-            <div class="piq-tile-icon">+</div>
+        <!-- Card 4: Revenue Ops -->
+        <div class="ust-mc ust-mc-4" data-href="/service-revops" tabindex="0" role="button" aria-label="Revenue Ops">
+          <div class="ust-mc-default">
+            <div class="ust-mc-tag">RevOps · Reporting</div>
+            <div class="ust-mc-title">Revenue Ops</div>
           </div>
-          <div class="piq-tile-hover">
-            <div class="piq-hover-title">Revenue Ops</div>
-            <div class="piq-hover-desc">One revenue view, zero blind spots. −55% reporting overhead. 100% pipeline coverage.</div>
-            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          <div class="ust-mc-expanded">
+            <div class="ust-mc-exp-title">Revenue Ops</div>
+            <div class="ust-mc-exp-desc">One revenue view, zero blind spots. −55% reporting overhead. Pipeline, forecast, and attribution unified.</div>
+            <a href="/service-revops" class="ust-mc-exp-link">Explore RevOps <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
-        </a>
+          <div class="ust-mc-plus">+</div>
+        </div>
 
-        <!-- IQ badge at 4-corner intersection -->
-        <div class="piq-badge">IQ</div>
-      </div>
+        <!-- IQ badge at the intersection of all 4 cards -->
+        <div class="ust-iq-badge">IQ</div>
 
+      </div><!-- /mosaic -->
     </div>
   </div>
 </section>
@@ -875,6 +906,41 @@ function handleSubmit(btn) {
     btn.style.background = '#047857';
   }, 1200);
 }
+// ── UST-STYLE CLICK-EXPAND MOSAIC ──
+  document.querySelectorAll('.ust-mc').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // If clicking the expand link, navigate
+      if(e.target.closest('.ust-mc-exp-link')) return;
+      const isActive = this.classList.contains('ust-active');
+      // Deactivate all
+      document.querySelectorAll('.ust-mc').forEach(c => {
+        c.classList.remove('ust-active');
+        c.querySelector('.ust-mc-plus').textContent = '+';
+      });
+      if(!isActive) {
+        this.classList.add('ust-active');
+        this.querySelector('.ust-mc-plus').textContent = '×';
+      }
+    });
+    // Keyboard support
+    card.addEventListener('keydown', function(e) {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+// ── ACCORDION CARDS (kept for other uses) ──
+  document.querySelectorAll('.ust-card').forEach(card => {
+    const top = card.querySelector('.ust-card-top');
+    if(!top) return;
+    top.addEventListener('click', () => {
+      const wasActive = card.classList.contains('active');
+      document.querySelectorAll('.ust-card').forEach(c => c.classList.remove('active'));
+      if(!wasActive) card.classList.add('active');
+    });
+  });
 </script>
 </body>
 </html>
