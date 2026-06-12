@@ -285,7 +285,7 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 }
 
 
-    /* ══ UST MOSAIC PIXEL-PERFECT v6 ══ */
+    /* ══ PROCESS IQ MOSAIC — based on UST exact code ══ */
     .um-outer { padding: 96px 0; background: #fff; }
     .um-wrap {
       max-width: 1300px; margin: 0 auto; padding: 0 48px;
@@ -295,173 +295,145 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       align-items: center;
     }
 
-    /* Container — exact pixel layout matching UST image */
-    .um-grid {
+    /* Grid container — two columns side by side */
+    .piq-grid-container {
       position: relative;
-      /* Total width: 510 + 14 + 290 = 814px
-         Total height: 290 + 14 + 520 = 824px */
+      display: flex;
+      gap: 16px;
       width: 100%;
-      max-width: 580px;
-      aspect-ratio: auto;
-      display: grid;
-      /* col widths proportional: big=510, gap=14, small=290 → ratio ~1.75:1 */
-      grid-template-columns: 1.75fr 1fr;
-      /* row heights: top=290, gap=14, bottom=520 → ratio ~0.56:1 */
-      grid-template-rows: 290px 520px;
-      gap: 14px;
-      background: transparent;
+      max-width: 600px;
       margin-left: auto;
     }
-
-    /* ── BASE CARD ── */
-    .um-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: box-shadow .3s;
-    }
-    .um-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,.2); }
-
-    .um-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      transition: transform .55s cubic-bezier(.25,.46,.45,.94);
-    }
-    .um-card:hover .um-bg { transform: scale(1.04); }
-
-    /* ── SMALL card: title bottom-left, + bottom-right ── */
-    .um-small {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 0 18px 18px;
-      z-index: 2;
-      transition: opacity .3s;
-    }
-    .um-small-title {
-      font-size: 16px; font-weight: 600; color: #fff;
-      line-height: 1.25;
-      text-shadow: 0 1px 6px rgba(0,0,0,.5);
-    }
-    .um-plus {
-      position: absolute; bottom: 14px; right: 16px;
-      width: 30px; height: 30px; border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,.6);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,.8);
-      font-size: 22px; font-weight: 300; line-height: 0;
-      z-index: 3;
-      transition: all .3s;
+    .piq-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
     }
 
-    /* ── BIG card: photo top + teal panel bottom ── */
-    .um-expanded {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      z-index: 2;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s;
-    }
-    .um-exp-photo {
-      flex: 1; position: relative; overflow: hidden;
-    }
-    .um-exp-photo-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center top;
-      transition: transform .55s cubic-bezier(.25,.46,.45,.94);
-    }
-    .um-card:hover .um-exp-photo-bg { transform: scale(1.04); }
-    .um-exp-panel {
-      background: #0a7c8c;
-      padding: 22px 22px 24px;
-      flex-shrink: 0;
-    }
-    .um-exp-title {
-      font-family: var(--serif);
-      font-size: 22px; font-weight: 600; color: #fff;
-      line-height: 1.2; margin-bottom: 10px;
-    }
-    .um-exp-desc {
-      font-size: 14px; font-weight: 700;
-      color: rgba(255,255,255,.9);
-      line-height: 1.6; margin-bottom: 14px;
-    }
-    .um-exp-link {
-      display: inline-flex; align-items: center; gap: 4px;
-      color: #fff; text-decoration: none;
-      font-size: 22px; font-weight: 300;
-      transition: gap .2s;
-    }
-    .um-exp-link:hover { gap: 8px; }
-
-    /* ── ACTIVE ── */
-    .um-card.um-active .um-small    { opacity: 0; pointer-events: none; }
-    .um-card.um-active .um-expanded { opacity: 1; pointer-events: all; }
-    .um-card.um-active .um-plus {
-      transform: rotate(45deg);
-      border-color: rgba(255,255,255,.9);
-      background: rgba(255,255,255,.15);
-    }
-
-    /* ── GRID POSITIONS ── */
-    /* TOP-LEFT small: sits in col2, row1  (right-aligned like UST) */
-    #um-c1 { grid-column: 1; grid-row: 1; }
-    /* TOP-RIGHT small: col2, row1 */
-    #um-c2 { grid-column: 2; grid-row: 1; }
-    /* BOTTOM-LEFT big: col1, row2 */
-    #um-c3 { grid-column: 1; grid-row: 2; }
-    /* BOTTOM-RIGHT small: col2, row2 */
-    #um-c4 { grid-column: 2; grid-row: 2; }
-
-    /* IQ badge at the 4-corner intersection */
-    .um-badge {
+    /* IQ badge at center intersection */
+    .piq-iq-badge {
       position: absolute;
-      /* horizontally: at the gap between col1 and col2
-         = col1 fraction × total width
-         grid col ratio 1.75:1, so col1 = 1.75/2.75 = 63.6% */
-      left: calc(63.6% + 7px);   /* center of the 14px gap */
-      /* vertically: at gap between row1 (290px) and row2
-         = (290 + 7) / total_height … approximate 35% */
-      top: 290px;
+      top: 250px;
+      left: 50%;
       transform: translate(-50%, -50%);
-      background: #fff;
-      color: var(--dark);
-      font-family: var(--serif);
-      font-size: 26px; font-weight: 800;
-      width: 74px; height: 74px;
-      border-radius: 3px;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 20;
-      box-shadow: 0 2px 20px rgba(0,0,0,.1);
-      pointer-events: none;
+      background-color: #fff;
+      color: #0d1b2a;
+      width: 72px; height: 72px;
+      display: flex; justify-content: center; align-items: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px; font-weight: 800;
+      z-index: 10;
+      box-shadow: 0 4px 16px rgba(0,0,0,.13);
+      border-radius: 2px;
       letter-spacing: -1px;
     }
 
-    /* When a top card becomes big, its row expands */
-    .um-grid.top-active {
-      grid-template-rows: 520px 290px;
+    /* Individual card */
+    .piq-card {
+      position: relative;
+      height: 250px;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: height 0.4s ease;
+      color: #fff;
     }
-    .um-grid.top-active .um-badge {
-      top: 520px;
+    .piq-card.piq-active {
+      height: 516px; /* 250 + 250 + 16px gap */
+      cursor: default;
     }
 
-    @media(max-width:1100px){
-      .um-wrap { grid-template-columns: 1fr; }
-      .um-grid { max-width: 500px; grid-template-rows: 240px 440px; }
-      .um-badge { top: 240px; }
-      .um-grid.top-active { grid-template-rows: 440px 240px; }
-      .um-grid.top-active .um-badge { top: 440px; }
+    /* Collapsed state */
+    .piq-collapsed {
+      position: absolute;
+      inset: 0;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: opacity 0.4s ease;
+      z-index: 2;
     }
+    .piq-card.piq-active .piq-collapsed {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .piq-collapsed-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      line-height: 1.3;
+      color: #fff;
+    }
+    .piq-plus {
+      align-self: flex-end;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.6);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.8);
+      font-size: 20px; font-weight: 300; line-height: 0;
+      transition: all .3s;
+    }
+    .piq-card:hover .piq-plus {
+      border-color: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.1);
+    }
+
+    /* Expanded state */
+    .piq-expanded {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+    .piq-card.piq-active .piq-expanded {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .piq-exp-image {
+      height: 55%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    .piq-exp-content {
+      flex: 1;
+      background-color: #0a7c8c;
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .piq-exp-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px; font-weight: 600; color: #fff;
+      margin-bottom: 10px; line-height: 1.2;
+    }
+    .piq-exp-desc {
+      font-size: 14px; font-weight: 600;
+      color: rgba(255,255,255,.9);
+      line-height: 1.6; margin-bottom: 12px;
+    }
+    .piq-exp-arrow {
+      margin-top: auto;
+      font-size: 22px; color: #fff;
+      text-decoration: none;
+      transition: letter-spacing .2s;
+      display: inline-block;
+    }
+    .piq-exp-arrow:hover { letter-spacing: 2px; }
+
+    @media(max-width:1100px){ .um-wrap { grid-template-columns: 1fr; } }
     @media(max-width:600px){
-      .um-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 180px 340px;
-        max-width: 100%;
-      }
-      #um-c3 { grid-column: 1 / 3; }
-      #um-c4 { display: none; }
-      .um-badge { display: none; }
+      .piq-grid-container { flex-direction: column; }
+      .piq-iq-badge { display: none; }
+      .piq-card.piq-active { height: 420px; }
     }
   </style>
 </head>
@@ -610,104 +582,96 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.
       </p>
       <a href="/contact"
-         style="display:inline-flex;align-items:center;gap:10px;border:1.5px solid #1a2332;border-radius:2px;padding:13px 22px;font-size:14px;font-weight:500;color:#1a2332;text-decoration:none;margin-top:8px;transition:all .2s;"
-         class="fade-up fd3"
-         onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'"
-         onmouseout="this.style.borderColor='#1a2332';this.style.color='#1a2332'">
+        style="display:inline-flex;align-items:center;gap:10px;border:1.5px solid #1a2332;border-radius:2px;padding:13px 22px;font-size:14px;font-weight:500;color:#1a2332;text-decoration:none;margin-top:8px;transition:all .2s;"
+        class="fade-up fd3"
+        onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'"
+        onmouseout="this.style.borderColor='#1a2332';this.style.color='#1a2332'">
         Explore our solutions
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
 
-    <!-- RIGHT: mosaic -->
-    <div class="um-grid fade-up fd2" id="um-grid">
+    <!-- RIGHT: mosaic — exact UST column structure -->
+    <div class="piq-grid-container fade-up fd2">
 
-      <!-- TOP-LEFT: CRM Architecture -->
-      <div class="um-card" id="um-c1" data-idx="0" tabindex="0" role="button">
-        <div class="um-bg" style="background:linear-gradient(160deg,#0c1e2c 0%,#0a3650 45%,#0a5472 100%);"></div>
-        <div class="um-small">
-          <div class="um-small-title">CRM Architecture</div>
-        </div>
-        <div class="um-expanded">
-          <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#0a1e2c 0%,#0a4060 45%,#0a6682 100%);"></div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,124,140,.3) 100%);"></div>
-          </div>
-          <div class="um-exp-panel">
-            <div class="um-exp-title">CRM Architecture</div>
-            <div class="um-exp-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos.</div>
-            <a href="/service-crm" class="um-exp-link">→</a>
-          </div>
-        </div>
-        <div class="um-plus">+</div>
-      </div>
+      <!-- COLUMN 1: CRM (top) + RPA (bottom, active/big) -->
+      <div class="piq-col">
 
-      <!-- TOP-RIGHT: Growth Funnels -->
-      <div class="um-card" id="um-c2" data-idx="1" tabindex="0" role="button">
-        <div class="um-bg" style="background:linear-gradient(160deg,#052e3a 0%,#086878 45%,#0a96aa 100%);"></div>
-        <div class="um-small">
-          <div class="um-small-title">Growth Funnels</div>
-        </div>
-        <div class="um-expanded">
-          <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#04262e 0%,#075e6c 45%,#0a8899 100%);"></div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,124,140,.3) 100%);"></div>
+        <!-- Card 1: CRM Architecture (small) -->
+        <div class="piq-card" onclick="piqExpand(this)" style="background:linear-gradient(155deg,#0c1e2c,#0a3650,#0a5472);">
+          <div class="piq-collapsed" style="background:linear-gradient(160deg,rgba(13,30,44,.6) 0%,rgba(10,54,80,.2) 100%);">
+            <div class="piq-collapsed-title">CRM Architecture</div>
+            <div class="piq-plus">+</div>
           </div>
-          <div class="um-exp-panel">
-            <div class="um-exp-title">Growth Funnels</div>
-            <div class="um-exp-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue with full CRM attribution.</div>
-            <a href="/service-funnels" class="um-exp-link">→</a>
+          <div class="piq-expanded">
+            <div class="piq-exp-image" style="background:linear-gradient(160deg,#0a2030 0%,#0a4060 45%,#0a6882 100%);"></div>
+            <div class="piq-exp-content">
+              <div class="piq-exp-title">CRM Architecture</div>
+              <div class="piq-exp-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos.</div>
+              <a href="/service-crm" class="piq-exp-arrow">&#8594;</a>
+            </div>
           </div>
         </div>
-        <div class="um-plus">+</div>
-      </div>
 
-      <!-- BOTTOM-LEFT: RPA Automation — BIG by default -->
-      <div class="um-card um-active" id="um-c3" data-idx="2" tabindex="0" role="button">
-        <div class="um-bg" style="background:linear-gradient(160deg,#054f58 0%,#0a7080 45%,#0d90a2 100%);"></div>
-        <div class="um-small">
-          <div class="um-small-title">RPA Automation</div>
-        </div>
-        <div class="um-expanded">
-          <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#065868 0%,#0a8090 40%,#0daabf 100%);"></div>
-            <!-- Subtle texture to simulate photo -->
-            <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 30% 40%,rgba(255,255,255,.08) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(10,124,140,.15) 0%,transparent 50%);"></div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,124,140,.35) 100%);"></div>
+        <!-- Card 3: RPA Automation (big, active by default) -->
+        <div class="piq-card piq-active" onclick="piqExpand(this)" style="background:linear-gradient(155deg,#054f58,#0a7080,#0d90a2);">
+          <div class="piq-collapsed" style="background:linear-gradient(160deg,rgba(5,79,88,.5) 0%,rgba(10,112,128,.2) 100%);">
+            <div class="piq-collapsed-title">RPA Automation</div>
+            <div class="piq-plus">+</div>
           </div>
-          <div class="um-exp-panel">
-            <div class="um-exp-title">RPA Automation</div>
-            <div class="um-exp-desc">78% of manual ops replaced. Eliminate bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
-            <a href="/service-rpa" class="um-exp-link">→</a>
+          <div class="piq-expanded">
+            <div class="piq-exp-image" style="background:linear-gradient(160deg,#065868 0%,#0a8090 40%,#0daabf 100%);background-image:radial-gradient(circle at 30% 40%,rgba(255,255,255,.08) 0%,transparent 55%),radial-gradient(circle at 75% 65%,rgba(10,160,190,.2) 0%,transparent 45%),linear-gradient(160deg,#065868 0%,#0a8090 40%,#0daabf 100%);"></div>
+            <div class="piq-exp-content">
+              <div class="piq-exp-title">RPA Automation</div>
+              <div class="piq-exp-desc">78% of manual ops replaced. Eliminate bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
+              <a href="/service-rpa" class="piq-exp-arrow">&#8594;</a>
+            </div>
           </div>
         </div>
-        <div class="um-plus">+</div>
-      </div>
 
-      <!-- BOTTOM-RIGHT: Revenue Ops — small, same height as big -->
-      <div class="um-card" id="um-c4" data-idx="3" tabindex="0" role="button">
-        <div class="um-bg" style="background:linear-gradient(160deg,#0a566a 0%,#0a7080 45%,#0a8e9e 100%);"></div>
-        <div class="um-small">
-          <div class="um-small-title">Revenue Ops</div>
-        </div>
-        <div class="um-expanded">
-          <div class="um-exp-photo">
-            <div class="um-exp-photo-bg" style="background:linear-gradient(160deg,#094e60 0%,#0a6878 45%,#0a8898 100%);"></div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,124,140,.3) 100%);"></div>
-          </div>
-          <div class="um-exp-panel">
-            <div class="um-exp-title">Revenue Ops</div>
-            <div class="um-exp-desc">One revenue view, zero blind spots. −55% reporting overhead. Pipeline, forecast &amp; attribution unified.</div>
-            <a href="/service-revops" class="um-exp-link">→</a>
-          </div>
-        </div>
-        <div class="um-plus">+</div>
-      </div>
+      </div><!-- /col 1 -->
 
-      <!-- IQ badge -->
-      <div class="um-badge">IQ</div>
+      <!-- IQ badge at intersection -->
+      <div class="piq-iq-badge">IQ</div>
 
-    </div>
+      <!-- COLUMN 2: Growth Funnels (top) + Revenue Ops (bottom) -->
+      <div class="piq-col">
+
+        <!-- Card 2: Growth Funnels (small) -->
+        <div class="piq-card" onclick="piqExpand(this)" style="background:linear-gradient(155deg,#052e3a,#086878,#0a96aa);">
+          <div class="piq-collapsed" style="background:linear-gradient(160deg,rgba(5,46,58,.5) 0%,rgba(8,104,120,.2) 100%);">
+            <div class="piq-collapsed-title">Growth Funnels</div>
+            <div class="piq-plus">+</div>
+          </div>
+          <div class="piq-expanded">
+            <div class="piq-exp-image" style="background:linear-gradient(160deg,#04262e 0%,#075e6c 45%,#0a8899 100%);"></div>
+            <div class="piq-exp-content">
+              <div class="piq-exp-title">Growth Funnels</div>
+              <div class="piq-exp-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue with full CRM attribution.</div>
+              <a href="/service-funnels" class="piq-exp-arrow">&#8594;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Revenue Ops (small) -->
+        <div class="piq-card" onclick="piqExpand(this)" style="background:linear-gradient(155deg,#0a566a,#0a7080,#0a8e9e);">
+          <div class="piq-collapsed" style="background:linear-gradient(160deg,rgba(10,86,106,.5) 0%,rgba(10,112,128,.2) 100%);">
+            <div class="piq-collapsed-title">Revenue Ops</div>
+            <div class="piq-plus">+</div>
+          </div>
+          <div class="piq-expanded">
+            <div class="piq-exp-image" style="background:linear-gradient(160deg,#094e60 0%,#0a6878 45%,#0a8898 100%);"></div>
+            <div class="piq-exp-content">
+              <div class="piq-exp-title">Revenue Ops</div>
+              <div class="piq-exp-desc">One revenue view, zero blind spots. −55% reporting overhead. Pipeline, forecast &amp; attribution unified.</div>
+              <a href="/service-revops" class="piq-exp-arrow">&#8594;</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /col 2 -->
+
+    </div><!-- /piq-grid-container -->
   </div>
 </section>
 
@@ -976,69 +940,12 @@ function handleSubmit(btn) {
     btn.style.background = '#047857';
   }, 1200);
 }
-// ══ UST MOSAIC v6: 3 small + 1 big, click to swap big card ══════════
-  (function() {
-    const grid = document.getElementById('um-grid');
-    if (!grid) return;
-    const cards = Array.from(grid.querySelectorAll('.um-card'));
-    const badge = grid.querySelector('.um-badge');
-
-    // Default row heights (bottom big)
-    const ROWS_BOTTOM_BIG = '290px 520px';
-    const ROWS_TOP_BIG    = '520px 290px';
-    const BADGE_TOP_DEFAULT = '290px';
-    const BADGE_TOP_TOPBIG  = '520px';
-
-    // Responsive heights
-    function getHeights() {
-      const w = grid.offsetWidth;
-      if (w < 400) return { small: 160, big: 320 };
-      if (w < 500) return { small: 200, big: 380 };
-      return { small: 290, big: 520 };
-    }
-
-    function applyLayout(activeIdx) {
-      const { small, big } = getHeights();
-      const isTop = activeIdx === 0 || activeIdx === 1;
-      const row1 = isTop ? big : small;
-      const row2 = isTop ? small : big;
-      grid.style.gridTemplateRows = `${row1}px ${row2}px`;
-      if (badge) badge.style.top = `${row1}px`;
-    }
-
-    function setActive(card) {
-      cards.forEach(c => {
-        c.classList.remove('um-active');
-        c.querySelector('.um-plus').textContent = '+';
-      });
-      if (card) {
-        card.classList.add('um-active');
-        card.querySelector('.um-plus').textContent = '×';
-        applyLayout(parseInt(card.dataset.idx));
-      }
-    }
-
-    cards.forEach(card => {
-      card.addEventListener('click', function(e) {
-        if (e.target.closest('.um-exp-link')) return;
-        const wasActive = this.classList.contains('um-active');
-        if (!wasActive) setActive(this);
-        // don't allow deactivating — always one card big
-      });
-      card.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
-      });
-    });
-
-    // Init: RPA (idx 2, bottom-left) is the big card
-    setActive(document.getElementById('um-c3'));
-
-    // Re-apply on resize
-    window.addEventListener('resize', () => {
-      const active = grid.querySelector('.um-active');
-      if (active) applyLayout(parseInt(active.dataset.idx));
-    });
-  })();
+// ══ PIQ MOSAIC — click to expand, one active at a time ══════════════
+  function piqExpand(clickedCard) {
+    if (clickedCard.classList.contains('piq-active')) return;
+    document.querySelectorAll('.piq-card').forEach(c => c.classList.remove('piq-active'));
+    clickedCard.classList.add('piq-active');
+  }
 
 </script>
 </body>
