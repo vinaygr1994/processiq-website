@@ -284,150 +284,162 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
   .footer-bottom{padding:16px 24px;}
 }
 
-    /* ── UST-STYLE CLICK-EXPAND MOSAIC ── */
-    .ust-mosaic-wrap{
+
+    /* ══════════════════════════════════════════
+       UST-EXACT EXPAND MOSAIC
+       - 2×2 grid, right col has one expanded card (tall) + 2 small
+       - Clicking small card swaps which one is tall
+    ══════════════════════════════════════════ */
+
+    .xm-section{ padding:96px 0; background:#fff; }
+    .xm-wrap{
+      max-width:1300px; margin:0 auto; padding:0 48px;
       display:grid;
-      grid-template-columns:1fr 1fr;
-      grid-template-rows:280px 280px;
-      gap:3px;
-      background:#cdd5de;
-      position:relative;
+      grid-template-columns:1fr 1.15fr;
+      gap:72px;
+      align-items:center;
     }
-    /* Each card */
-    .ust-mc{
+
+    /* ── GRID CONTAINER ── */
+    .xm-grid{
+      display:grid;
+      /* col1 = small, col2 = small; rows flex */
+      grid-template-columns:1fr 1fr;
+      /* row heights driven by JS via CSS vars */
+      grid-auto-rows:auto;
+      gap:4px;
+      background:#d0d7df;
+      border-radius:4px;
+      overflow:hidden;
+      position:relative;
+      /* total height stays fixed */
+      height:520px;
+    }
+
+    /* ── CARD BASE ── */
+    .xm-card{
       position:relative;
       overflow:hidden;
       cursor:pointer;
-      text-decoration:none;
-      display:block;
-      transition:grid-row .4s;
+      transition:all .42s cubic-bezier(.4,0,.2,1);
+      /* default = small: each row ~50% */
+      flex:1;
     }
-    /* Background gradient + pseudo-image effect */
-    .ust-mc::before{
-      content:'';
-      position:absolute;inset:0;
+
+    /* background photo / gradient */
+    .xm-card-bg{
+      position:absolute; inset:0;
       background-size:cover;
       background-position:center;
       transition:transform .5s cubic-bezier(.25,.46,.45,.94);
     }
-    .ust-mc:hover::before{ transform:scale(1.04); }
-    /* Dark scrim */
-    .ust-mc::after{
-      content:'';
-      position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(13,27,42,.1) 0%,rgba(13,27,42,.65) 100%);
+    .xm-card:hover .xm-card-bg{ transform:scale(1.04); }
+
+    /* ── DEFAULT STATE: title + plus ── */
+    .xm-card-default{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:20px 22px;
+      z-index:3;
       transition:opacity .3s;
     }
-    /* Default content — title + plus at bottom */
-    .ust-mc-default{
-      position:absolute;inset:0;
-      padding:24px 26px;
-      display:flex;flex-direction:column;
-      justify-content:flex-end;
-      z-index:3;
-      transition:opacity .3s, transform .3s;
+    .xm-card-name{
+      font-size:17px; font-weight:700; color:#fff;
+      line-height:1.25; text-shadow:0 1px 4px rgba(0,0,0,.4);
     }
-    .ust-mc-tag{
-      font-size:10px;font-weight:800;letter-spacing:.18em;
-      text-transform:uppercase;color:rgba(255,255,255,.5);
-      margin-bottom:8px;
-    }
-    .ust-mc-title{
-      font-size:18px;font-weight:700;color:#fff;line-height:1.25;
-    }
-    .ust-mc-plus{
-      position:absolute;bottom:18px;right:20px;
-      width:32px;height:32px;
-      border:1.5px solid rgba(255,255,255,.4);
-      border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      color:rgba(255,255,255,.6);
-      font-size:20px;font-weight:300;
-      line-height:1;
+    .xm-plus{
+      position:absolute; bottom:14px; right:16px;
+      width:32px; height:32px; border-radius:50%;
+      border:1.5px solid rgba(255,255,255,.5);
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.7); font-size:20px; font-weight:300;
       z-index:4;
-      transition:all .3s cubic-bezier(.4,0,.2,1);
+      transition:all .3s;
+      line-height:0;
     }
-    /* Expanded content — hidden by default */
-    .ust-mc-expanded{
-      position:absolute;inset:0;
-      padding:28px 28px 24px;
-      display:flex;flex-direction:column;
-      justify-content:flex-end;
+
+    /* ── EXPANDED STATE: photo on top, teal panel on bottom ── */
+    .xm-card-expanded{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
       z-index:3;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .3s;
+      opacity:0; pointer-events:none;
+      transition:opacity .35s;
     }
-    .ust-mc-exp-title{
+    /* top: photo/gradient (60% of expanded height) */
+    .xm-card-photo{
+      flex:1;
+      position:relative;
+      overflow:hidden;
+    }
+    .xm-card-photo-bg{
+      position:absolute; inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:transform .5s cubic-bezier(.25,.46,.45,.94);
+    }
+    /* teal bottom panel */
+    .xm-card-panel{
+      background:#0a7c8c;
+      padding:18px 22px 20px;
+      flex-shrink:0;
+    }
+    .xm-panel-title{
       font-family:var(--serif);
-      font-size:20px;font-weight:600;color:#fff;
-      line-height:1.2;margin-bottom:12px;
+      font-size:19px; font-weight:600; color:#fff;
+      margin-bottom:8px; line-height:1.25;
     }
-    .ust-mc-exp-desc{
-      font-size:14px;color:rgba(255,255,255,.82);
-      line-height:1.7;margin-bottom:18px;
-      max-width:300px;
+    .xm-panel-desc{
+      font-size:13px; color:rgba(255,255,255,.85);
+      line-height:1.65; margin-bottom:12px;
     }
-    .ust-mc-exp-link{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:13px;font-weight:700;color:#fff;
+    .xm-panel-link{
+      display:inline-flex; align-items:center; gap:7px;
+      color:#fff; text-decoration:none;
+      font-size:13px; font-weight:700;
       border-bottom:1.5px solid rgba(255,255,255,.5);
-      padding-bottom:3px;
-      text-decoration:none;
-      transition:gap .2s,border-color .2s;
+      padding-bottom:2px;
+      transition:gap .2s, border-color .2s;
     }
-    .ust-mc-exp-link:hover{ gap:12px; border-color:#fff; }
-    /* ── ACTIVE STATE ── */
-    .ust-mc.ust-active::after{
-      background:linear-gradient(180deg,rgba(6,95,107,.55) 0%,rgba(6,95,107,.92) 100%);
-    }
-    .ust-mc.ust-active .ust-mc-default{
-      opacity:0;pointer-events:none;
-    }
-    .ust-mc.ust-active .ust-mc-expanded{
-      opacity:1;pointer-events:all;
-    }
-    .ust-mc.ust-active .ust-mc-plus{
+    .xm-panel-link:hover{ gap:11px; border-color:#fff; }
+
+    /* ── ACTIVE CARD ── */
+    .xm-card.xm-active .xm-card-default{ opacity:0; pointer-events:none; }
+    .xm-card.xm-active .xm-card-expanded{ opacity:1; pointer-events:all; }
+    .xm-card.xm-active .xm-plus{
       transform:rotate(45deg);
-      border-color:rgba(255,255,255,.8);
+      border-color:rgba(255,255,255,.9);
       color:#fff;
-      background:rgba(255,255,255,.15);
+      background:rgba(255,255,255,.2);
     }
-    /* IQ badge at the 4-corner intersection */
-    .ust-iq-badge{
+
+    /* IQ badge */
+    .xm-badge{
       position:absolute;
-      /* sits exactly where row1 meets row2, col1 meets col2 */
-      top:calc(280px + 1.5px); /* row height + half gap */
-      left:50%;
+      left:50%; top:50%;
       transform:translate(-50%,-50%);
       background:#fff;
       color:var(--dark);
       font-family:var(--serif);
-      font-size:20px;font-weight:700;
-      width:56px;height:56px;
+      font-size:20px; font-weight:700;
+      width:56px; height:56px;
       border-radius:2px;
-      display:flex;align-items:center;justify-content:center;
-      z-index:10;
-      box-shadow:0 4px 20px rgba(0,0,0,.12);
+      display:flex; align-items:center; justify-content:center;
+      z-index:20;
+      box-shadow:0 4px 20px rgba(0,0,0,.15), 0 0 0 4px #fff;
       pointer-events:none;
-      letter-spacing:-.5px;
+      letter-spacing:-1px;
     }
-    /* Tile backgrounds */
-    .ust-mc-1::before{ background:linear-gradient(155deg,#0d2233,#0a3d52,#0a5c70); }
-    .ust-mc-2::before{ background:linear-gradient(155deg,#072830,#085060,#0a7c8c); }
-    .ust-mc-3::before{ background:linear-gradient(155deg,#065f6b,#0a7c8c,#12a8bc); }
-    .ust-mc-4::before{ background:linear-gradient(155deg,#1a2f42,#0d3a52,#0a4a60); }
-    @media(max-width:768px){
-      .ust-mosaic-wrap{grid-template-rows:200px 200px;}
-      .ust-iq-badge{top:calc(200px + 1.5px);}
-      .ust-mc-title{font-size:15px;}
-      .ust-mc-exp-title{font-size:17px;}
-      .ust-mc-exp-desc{font-size:13px;}
+
+    @media(max-width:900px){
+      .xm-wrap{ grid-template-columns:1fr; }
+      .xm-grid{ height:440px; }
     }
     @media(max-width:520px){
-      .ust-mosaic-wrap{grid-template-columns:1fr;grid-template-rows:repeat(4,180px);}
-      .ust-iq-badge{display:none;}
+      .xm-grid{ height:auto; grid-template-columns:1fr; grid-template-rows:repeat(4,160px); }
+      .xm-badge{ display:none; }
     }
+
   </style>
 </head>
 <body>
@@ -562,82 +574,102 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 <!-- ══════════════════════════════════════════
      WHAT WE DO
 ══════════════════════════════════════════ -->
-<section class="wwd-section" id="services">
-  <div style="max-width:1300px;margin:0 auto;padding:96px 48px;">
-    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center;">
+<section class="xm-section" id="services">
+  <div class="xm-wrap">
 
-      <!-- LEFT -->
-      <div>
-        <div class="sec-label fade-up">Process IQ</div>
-        <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(30px,3.2vw,50px);line-height:1.1;margin-bottom:20px;">Built on Automation.<br/>Designed for impact.</h2>
-        <p class="sec-sub fade-up fd2">From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.</p>
-        <a href="/contact" class="btn-outline-teal fade-up fd3">Explore our solutions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <!-- LEFT: text -->
+    <div>
+      <div class="sec-label fade-up">Process IQ</div>
+      <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(30px,3.2vw,52px);line-height:1.08;margin-bottom:22px;">Built on Automation.<br/>Designed for impact.</h2>
+      <p class="sec-sub fade-up fd2">From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.</p>
+      <a href="/contact" class="btn-outline-teal fade-up fd3">Explore our solutions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- RIGHT: mosaic -->
+    <div class="xm-grid fade-up fd2" id="xm-grid">
+
+      <!-- Card 1: CRM Architecture (col1 row1) -->
+      <div class="xm-card" id="xm-1" data-col="0" data-row="0">
+        <!-- Default bg -->
+        <div class="xm-card-bg" style="background:linear-gradient(155deg,#0d2233 0%,#0a3d52 55%,#0a5c72 100%);"></div>
+        <div class="xm-card-default">
+          <div class="xm-card-name">CRM Architecture</div>
+        </div>
+        <!-- Expanded view -->
+        <div class="xm-card-expanded">
+          <div class="xm-card-photo">
+            <div class="xm-card-photo-bg" style="background:linear-gradient(155deg,#0d2233 0%,#0a4a65 60%,#0a6680 100%);"></div>
+          </div>
+          <div class="xm-card-panel">
+            <div class="xm-panel-title">CRM Architecture</div>
+            <div class="xm-panel-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos.</div>
+            <a href="/service-crm" class="xm-panel-link">Explore CRM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="xm-plus">+</div>
       </div>
 
-      <!-- RIGHT: UST-style 2×2 click-expand mosaic -->
-      <div class="ust-mosaic-wrap fade-up fd2" id="ust-mosaic">
-
-        <!-- Card 1: CRM Architecture -->
-        <div class="ust-mc ust-mc-1 ust-active" data-href="/service-crm" tabindex="0" role="button" aria-label="CRM Architecture">
-          <div class="ust-mc-default">
-            <div class="ust-mc-tag">Salesforce · CRM</div>
-            <div class="ust-mc-title">CRM Architecture</div>
-          </div>
-          <div class="ust-mc-expanded">
-            <div class="ust-mc-exp-title">CRM Architecture</div>
-            <div class="ust-mc-exp-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos, every deal tracked.</div>
-            <a href="/service-crm" class="ust-mc-exp-link">Explore CRM <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-          <div class="ust-mc-plus">+</div>
+      <!-- Card 2: Growth Funnels (col2 row1) — starts ACTIVE -->
+      <div class="xm-card xm-active" id="xm-2" data-col="1" data-row="0">
+        <div class="xm-card-bg" style="background:linear-gradient(155deg,#063a44 0%,#0a6070 55%,#12a8bc 100%);"></div>
+        <div class="xm-card-default">
+          <div class="xm-card-name">Growth Funnels</div>
         </div>
-
-        <!-- Card 2: Growth Funnels -->
-        <div class="ust-mc ust-mc-2" data-href="/service-funnels" tabindex="0" role="button" aria-label="Growth Funnels">
-          <div class="ust-mc-default">
-            <div class="ust-mc-tag">Google · Meta Ads</div>
-            <div class="ust-mc-title">Growth Funnels</div>
+        <div class="xm-card-expanded">
+          <div class="xm-card-photo">
+            <div class="xm-card-photo-bg" style="background:linear-gradient(155deg,#053036 0%,#087080 55%,#0a9aad 100%);"></div>
           </div>
-          <div class="ust-mc-expanded">
-            <div class="ust-mc-exp-title">Growth Funnels</div>
-            <div class="ust-mc-exp-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue in your CRM. Full attribution modelling.</div>
-            <a href="/service-funnels" class="ust-mc-exp-link">Explore Funnels <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <div class="xm-card-panel">
+            <div class="xm-panel-title">Growth Funnels</div>
+            <div class="xm-panel-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue with full CRM attribution.</div>
+            <a href="/service-funnels" class="xm-panel-link">Explore Funnels <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
-          <div class="ust-mc-plus">+</div>
         </div>
+        <div class="xm-plus">+</div>
+      </div>
 
-        <!-- Card 3: RPA Automation -->
-        <div class="ust-mc ust-mc-3" data-href="/service-rpa" tabindex="0" role="button" aria-label="RPA Automation">
-          <div class="ust-mc-default">
-            <div class="ust-mc-tag">Automation · RPA</div>
-            <div class="ust-mc-title">RPA Automation</div>
-          </div>
-          <div class="ust-mc-expanded">
-            <div class="ust-mc-exp-title">RPA Automation</div>
-            <div class="ust-mc-exp-desc">78% of manual ops replaced. Eliminate bottlenecks from lead routing to compliance — 142 workflows live.</div>
-            <a href="/service-rpa" class="ust-mc-exp-link">Explore RPA <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-          <div class="ust-mc-plus">+</div>
+      <!-- Card 3: RPA Automation (col1 row2) -->
+      <div class="xm-card" id="xm-3" data-col="0" data-row="1">
+        <div class="xm-card-bg" style="background:linear-gradient(155deg,#065f6b 0%,#0a7c8c 55%,#0e9bae 100%);"></div>
+        <div class="xm-card-default">
+          <div class="xm-card-name">RPA Automation</div>
         </div>
-
-        <!-- Card 4: Revenue Ops -->
-        <div class="ust-mc ust-mc-4" data-href="/service-revops" tabindex="0" role="button" aria-label="Revenue Ops">
-          <div class="ust-mc-default">
-            <div class="ust-mc-tag">RevOps · Reporting</div>
-            <div class="ust-mc-title">Revenue Ops</div>
+        <div class="xm-card-expanded">
+          <div class="xm-card-photo">
+            <div class="xm-card-photo-bg" style="background:linear-gradient(155deg,#054f58 0%,#0a7080 55%,#0d90a0 100%);"></div>
           </div>
-          <div class="ust-mc-expanded">
-            <div class="ust-mc-exp-title">Revenue Ops</div>
-            <div class="ust-mc-exp-desc">One revenue view, zero blind spots. −55% reporting overhead. Pipeline, forecast, and attribution unified.</div>
-            <a href="/service-revops" class="ust-mc-exp-link">Explore RevOps <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <div class="xm-card-panel">
+            <div class="xm-panel-title">RPA Automation</div>
+            <div class="xm-panel-desc">78% of manual ops replaced. 142 automations live. Eliminate bottlenecks from lead routing to reporting.</div>
+            <a href="/service-rpa" class="xm-panel-link">Explore RPA <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
-          <div class="ust-mc-plus">+</div>
         </div>
+        <div class="xm-plus">+</div>
+      </div>
 
-        <!-- IQ badge at the intersection of all 4 cards -->
-        <div class="ust-iq-badge">IQ</div>
+      <!-- Card 4: Revenue Ops (col2 row2) -->
+      <div class="xm-card" id="xm-4" data-col="1" data-row="1">
+        <div class="xm-card-bg" style="background:linear-gradient(155deg,#1a2f42 0%,#0d3a52 55%,#0a4e68 100%);"></div>
+        <div class="xm-card-default">
+          <div class="xm-card-name">Revenue Ops</div>
+        </div>
+        <div class="xm-card-expanded">
+          <div class="xm-card-photo">
+            <div class="xm-card-photo-bg" style="background:linear-gradient(155deg,#142438 0%,#0a3245 55%,#0a4860 100%);"></div>
+          </div>
+          <div class="xm-card-panel">
+            <div class="xm-panel-title">Revenue Ops</div>
+            <div class="xm-panel-desc">One revenue view, zero blind spots. −55% reporting overhead. Pipeline, forecast &amp; attribution unified.</div>
+            <a href="/service-revops" class="xm-panel-link">Explore RevOps <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="xm-plus">+</div>
+      </div>
 
-      </div><!-- /mosaic -->
-    </div>
+      <!-- IQ badge at center intersection -->
+      <div class="xm-badge">IQ</div>
+
+    </div><!-- /xm-grid -->
   </div>
 </section>
 
@@ -941,6 +973,66 @@ function handleSubmit(btn) {
       if(!wasActive) card.classList.add('active');
     });
   });
+
+  // ── UST EXPAND MOSAIC ──────────────────────────────────────────────────
+  (function() {
+    const grid = document.getElementById('xm-grid');
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('.xm-card'));
+    const TOTAL_H = grid.offsetHeight || 520;
+    const GAP = 4;
+    // Row heights: active row gets BIG_H, inactive row gets SMALL_H
+    // Column widths stay 50/50
+    // We use grid-template-rows to resize rows
+
+    function getActiveCard() {
+      return grid.querySelector('.xm-card.xm-active');
+    }
+
+    function updateGrid() {
+      const active = getActiveCard();
+      if (!active) {
+        // No active: equal rows
+        grid.style.gridTemplateRows = '1fr 1fr';
+        return;
+      }
+      const activeRow = parseInt(active.dataset.row);
+      // Active row = ~62%, inactive row = ~38%
+      const bigPct  = 62;
+      const smPct   = 38;
+      if (activeRow === 0) {
+        grid.style.gridTemplateRows = bigPct + '% ' + smPct + '%';
+      } else {
+        grid.style.gridTemplateRows = smPct + '% ' + bigPct + '%';
+      }
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Allow link clicks through
+        if (e.target.closest('.xm-panel-link')) return;
+        const wasActive = this.classList.contains('xm-active');
+        // Deactivate all
+        cards.forEach(c => {
+          c.classList.remove('xm-active');
+          c.querySelector('.xm-plus').textContent = '+';
+        });
+        if (!wasActive) {
+          this.classList.add('xm-active');
+          this.querySelector('.xm-plus').textContent = '×';
+        }
+        updateGrid();
+      });
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
+      });
+    });
+
+    // Init: card 2 active = row 0, so row 0 is big
+    updateGrid();
+  })();
+
 </script>
 </body>
 </html>
