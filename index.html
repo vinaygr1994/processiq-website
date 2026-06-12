@@ -284,87 +284,115 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
   .footer-bottom{padding:16px 24px;}
 }
 
-    /* ── SERVICE MOSAIC (UST-style) ── */
-    .service-mosaic{
+    /* ── PIQ MOSAIC ── */
+    .piq-mosaic{
       display:grid;
       grid-template-columns:1fr 1fr;
-      grid-template-rows:auto auto;
-      gap:3px;
-      background:#e2e8f0;
-      border-radius:6px;
-      overflow:visible;
+      grid-template-rows:220px 240px;
+      gap:4px;
       position:relative;
     }
-    .mosaic-tile{
+    /* Each tile */
+    .piq-tile{
+      display:block;text-decoration:none;
       position:relative;overflow:hidden;
-      text-decoration:none;display:block;
-      min-height:200px;cursor:pointer;
-      transition:filter .3s;
+      background:var(--dark2);
     }
-    .mosaic-tile:hover{filter:brightness(1.08);}
-    .mosaic-tile-bg{position:absolute;inset:0;transition:transform .4s cubic-bezier(.4,0,.2,1);}
-    .mosaic-tile:hover .mosaic-tile-bg{transform:scale(1.04);}
-    .mosaic-tile-content{
-      position:absolute;inset:0;padding:24px;
+    /* Tile inner — default state */
+    .piq-tile-inner{
+      position:absolute;inset:0;padding:22px 24px;
       display:flex;flex-direction:column;justify-content:flex-end;
-      z-index:2;
+      z-index:2;transition:opacity .3s;
     }
-    .mosaic-tile-title{
+    .piq-tile-num{
+      font-size:10px;font-weight:800;letter-spacing:.18em;
+      text-transform:uppercase;color:rgba(255,255,255,.35);
+      margin-bottom:8px;
+    }
+    .piq-tile-name{
       font-size:17px;font-weight:700;color:#fff;
-      margin-bottom:5px;line-height:1.3;
+      margin-bottom:7px;line-height:1.25;
     }
-    .mosaic-tile-sub{font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;}
-    .mosaic-tile-plus{
-      position:absolute;bottom:14px;right:16px;
-      font-size:24px;color:rgba(255,255,255,.4);
-      font-weight:300;transition:transform .25s,color .25s;
+    .piq-tile-sub{
+      font-size:12px;color:rgba(255,255,255,.55);
+      line-height:1.6;max-width:90%;
     }
-    .mosaic-tile:hover .mosaic-tile-plus{transform:rotate(45deg);color:rgba(255,255,255,.8);}
-    /* Expand panel on hover */
-    .mosaic-tile-expand{
-      position:absolute;bottom:0;left:0;right:0;
-      background:rgba(10,124,140,.95);
-      padding:14px 20px;
-      transform:translateY(100%);
-      transition:transform .3s cubic-bezier(.4,0,.2,1);
+    .piq-tile-icon{
+      position:absolute;bottom:16px;right:18px;
+      width:28px;height:28px;border-radius:50%;
+      border:1.5px solid rgba(255,255,255,.25);
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(255,255,255,.4);font-size:18px;font-weight:300;
+      transition:all .3s;
+    }
+    .piq-tile-cta-row{
+      display:inline-flex;align-items:center;gap:7px;
+      margin-top:14px;font-size:13px;font-weight:700;color:#fff;
+      opacity:.85;
+    }
+    /* Hover overlay */
+    .piq-tile-hover{
+      position:absolute;inset:0;padding:22px 24px;
+      display:flex;flex-direction:column;justify-content:flex-end;
+      background:rgba(10,124,140,.96);
       z-index:3;
+      opacity:0;
+      transform:translateY(8px);
+      transition:opacity .3s,transform .3s;
     }
-    .mosaic-tile:hover .mosaic-tile-expand{transform:translateY(0);}
-    .mosaic-tile-expand p{font-size:12px;color:rgba(255,255,255,.9);line-height:1.55;margin-bottom:8px;}
-    .mosaic-tile-arrow{font-size:18px;color:#fff;font-weight:700;}
-    /* Featured tile — taller, spans rows */
-    .mosaic-featured{
-      grid-row:1 / 3;
-      grid-column:1;
-      min-height:403px;
+    .piq-tile:hover .piq-tile-inner{opacity:0;}
+    .piq-tile:hover .piq-tile-hover{opacity:1;transform:translateY(0);}
+    .piq-tile:hover .piq-tile-icon{
+      transform:rotate(45deg);
+      border-color:rgba(255,255,255,.7);
+      color:#fff;
     }
-    .mosaic-featured .mosaic-tile-content{justify-content:flex-end;padding:28px;}
-    .mosaic-featured .mosaic-tile-title{font-size:20px;margin-bottom:8px;}
-    .mosaic-featured .mosaic-tile-sub{font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;}
-    /* First two tiles go to column 2 */
-    #mt-crm{grid-column:2;grid-row:1;}
-    #mt-funnels{grid-column:2;grid-row:2;}
-    /* IQ badge at intersection */
-    .mosaic-iq-badge{
+    .piq-hover-title{
+      font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;
+    }
+    .piq-hover-desc{
+      font-size:13px;color:rgba(255,255,255,.85);line-height:1.65;margin-bottom:14px;
+    }
+    .piq-hover-cta{
+      display:inline-flex;align-items:center;gap:7px;
+      font-size:13px;font-weight:700;color:#fff;
+      border-bottom:1.5px solid rgba(255,255,255,.5);
+      padding-bottom:2px;
+    }
+    /* Tile colours */
+    .piq-t1{background:linear-gradient(150deg,#0d2233 0%,#0a3d50 100%);}
+    .piq-t2{background:linear-gradient(150deg,#072830 0%,#0a5c6e 100%);}
+    .piq-t3{background:linear-gradient(150deg,#065f6b 0%,#0a7c8c 100%);}
+    .piq-t4{background:linear-gradient(150deg,#1a2f42 0%,#0d3a52 100%);}
+    /* Featured tile — teal, with lighter hover */
+    .piq-featured .piq-tile-sub{color:rgba(255,255,255,.8);}
+    .piq-featured .piq-tile-num{color:rgba(255,255,255,.5);}
+    .piq-hover-invert{background:rgba(6,95,107,.97);}
+    /* IQ badge exactly at the 4-corner intersection */
+    .piq-badge{
       position:absolute;
-      top:50%;left:50%;
+      top:220px;left:50%;
       transform:translate(-50%,-50%);
       background:#fff;
       color:var(--dark);
       font-family:var(--serif);
-      font-size:22px;font-weight:700;
-      width:54px;height:54px;
-      border-radius:3px;
+      font-size:19px;font-weight:700;
+      width:52px;height:52px;
+      border-radius:2px;
       display:flex;align-items:center;justify-content:center;
-      z-index:10;
-      box-shadow:0 4px 20px rgba(0,0,0,.2);
+      z-index:20;
+      box-shadow:0 2px 16px rgba(0,0,0,.15),0 0 0 4px #fff;
       pointer-events:none;
+      letter-spacing:-.5px;
     }
     @media(max-width:900px){
-      .service-mosaic{grid-template-columns:1fr 1fr;}
-      .mosaic-featured{grid-row:auto;grid-column:auto;min-height:180px;}
-      #mt-crm,#mt-funnels{grid-column:auto;grid-row:auto;}
-      .mosaic-iq-badge{display:none;}
+      .piq-mosaic{grid-template-rows:180px 180px;}
+      .piq-tile-name{font-size:15px;}
+      .piq-badge{top:180px;}
+    }
+    @media(max-width:600px){
+      .piq-mosaic{grid-template-columns:1fr;grid-template-rows:repeat(4,150px);}
+      .piq-badge{display:none;}
     }
 
   </style>
@@ -502,67 +530,82 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
      WHAT WE DO
 ══════════════════════════════════════════ -->
 <section class="wwd-section" id="services">
-  <div style="max-width:1300px;margin:0 auto;padding:100px 48px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <div style="max-width:1300px;margin:0 auto;padding:96px 48px;">
+    <div style="display:grid;grid-template-columns:1fr 1.08fr;gap:72px;align-items:center;">
+
       <!-- LEFT: text -->
       <div>
         <div class="sec-label fade-up">Process IQ</div>
-        <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(32px,3.5vw,52px);line-height:1.1;margin-bottom:20px;">Built on Automation.<br/>Designed for impact.</h2>
+        <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(30px,3.2vw,50px);line-height:1.1;margin-bottom:20px;">Built on Automation.<br/>Designed for impact.</h2>
         <p class="sec-sub fade-up fd2">From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.</p>
-        <a href="/contact" class="btn-outline-teal fade-up fd3" style="margin-top:4px;">Explore our solutions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="/contact" class="btn-outline-teal fade-up fd3">Explore our solutions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
-      <!-- RIGHT: mosaic grid -->
-      <div class="service-mosaic fade-up fd2">
-        <a href="/service-crm" class="mosaic-tile mosaic-dark" id="mt-crm">
-          <div class="mosaic-tile-bg" style="background:linear-gradient(135deg,#0d1b2a 0%,#1a3a4c 100%);"></div>
-          <div class="mosaic-tile-content">
-            <div class="mosaic-tile-title">CRM Architecture</div>
-            <div class="mosaic-tile-sub">Salesforce design &amp; optimization</div>
-            <div class="mosaic-tile-plus">+</div>
+
+      <!-- RIGHT: 2×2 mosaic -->
+      <div class="piq-mosaic fade-up fd2">
+
+        <!-- Row 1 -->
+        <a href="/service-crm" class="piq-tile piq-t1">
+          <div class="piq-tile-inner">
+            <div class="piq-tile-num">01</div>
+            <div class="piq-tile-name">CRM Architecture</div>
+            <div class="piq-tile-sub">Salesforce design, implementation &amp; optimization.</div>
+            <div class="piq-tile-icon">+</div>
           </div>
-          <div class="mosaic-tile-expand">
-            <p>Full pipeline visibility from first touch to closed-won. 98% data accuracy.</p>
-            <span class="mosaic-tile-arrow">→</span>
-          </div>
-        </a>
-        <a href="/service-funnels" class="mosaic-tile mosaic-teal" id="mt-funnels">
-          <div class="mosaic-tile-bg" style="background:linear-gradient(135deg,#065f6b 0%,#0a7c8c 100%);"></div>
-          <div class="mosaic-tile-content">
-            <div class="mosaic-tile-title">Growth Funnels</div>
-            <div class="mosaic-tile-sub">Google &amp; Meta Ads attribution</div>
-            <div class="mosaic-tile-plus">+</div>
-          </div>
-          <div class="mosaic-tile-expand">
-            <p>3.1× average ROAS lift. Every ad dollar traced to closed revenue.</p>
-            <span class="mosaic-tile-arrow">→</span>
+          <div class="piq-tile-hover">
+            <div class="piq-hover-title">CRM Architecture</div>
+            <div class="piq-hover-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos.</div>
+            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
           </div>
         </a>
-        <a href="/service-rpa" class="mosaic-tile mosaic-featured" id="mt-rpa">
-          <div class="mosaic-tile-bg" style="background:linear-gradient(135deg,#0a7c8c 0%,#12a8bc 100%);"></div>
-          <div class="mosaic-tile-content">
-            <div class="mosaic-tile-title">RPA Automation</div>
-            <div class="mosaic-tile-sub">Eliminate manual bottlenecks across your stack — from lead routing to compliance reporting.</div>
+
+        <a href="/service-funnels" class="piq-tile piq-t2">
+          <div class="piq-tile-inner">
+            <div class="piq-tile-num">02</div>
+            <div class="piq-tile-name">Growth Funnels</div>
+            <div class="piq-tile-sub">Google &amp; Meta Ads with full attribution.</div>
+            <div class="piq-tile-icon">+</div>
           </div>
-          <div class="mosaic-tile-expand">
-            <p>78% of manual ops replaced. 4.2× deal cycle speed improvement.</p>
-            <span class="mosaic-tile-arrow">→</span>
-          </div>
-        </a>
-        <a href="/service-revops" class="mosaic-tile mosaic-dark" id="mt-revops">
-          <div class="mosaic-tile-bg" style="background:linear-gradient(135deg,#1a2f42 0%,#0d3a50 100%);"></div>
-          <div class="mosaic-tile-content">
-            <div class="mosaic-tile-title">Revenue Ops</div>
-            <div class="mosaic-tile-sub">End-to-end RevOps reporting</div>
-            <div class="mosaic-tile-plus">+</div>
-          </div>
-          <div class="mosaic-tile-expand">
-            <p>One revenue view, zero blind spots. −55% reporting overhead.</p>
-            <span class="mosaic-tile-arrow">→</span>
+          <div class="piq-tile-hover">
+            <div class="piq-hover-title">Growth Funnels</div>
+            <div class="piq-hover-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue in your CRM.</div>
+            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
           </div>
         </a>
-        <!-- IQ badge at intersection -->
-        <div class="mosaic-iq-badge">IQ</div>
+
+        <!-- Row 2 — featured (teal) + dark -->
+        <a href="/service-rpa" class="piq-tile piq-t3 piq-featured">
+          <div class="piq-tile-inner">
+            <div class="piq-tile-num">03</div>
+            <div class="piq-tile-name">RPA Automation</div>
+            <div class="piq-tile-sub">Eliminate manual bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
+            <div class="piq-tile-cta-row">Explore <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+          <div class="piq-tile-hover piq-hover-invert">
+            <div class="piq-hover-title">RPA Automation</div>
+            <div class="piq-hover-desc">78% of manual ops replaced. 142 automations live. 4.2× deal cycle speed.</div>
+            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </a>
+
+        <a href="/service-revops" class="piq-tile piq-t4">
+          <div class="piq-tile-inner">
+            <div class="piq-tile-num">04</div>
+            <div class="piq-tile-name">Revenue Ops</div>
+            <div class="piq-tile-sub">End-to-end RevOps reporting &amp; pipeline visibility.</div>
+            <div class="piq-tile-icon">+</div>
+          </div>
+          <div class="piq-tile-hover">
+            <div class="piq-hover-title">Revenue Ops</div>
+            <div class="piq-hover-desc">One revenue view, zero blind spots. −55% reporting overhead. 100% pipeline coverage.</div>
+            <div class="piq-hover-cta">Explore <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </a>
+
+        <!-- IQ badge at 4-corner intersection -->
+        <div class="piq-badge">IQ</div>
       </div>
+
     </div>
   </div>
 </section>
