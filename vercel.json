@@ -1,1 +1,25 @@
-{"version":2,"cleanUrls":true,"trailingSlash":false}
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/service-crm/crm-architecture-design",    "dest": "/service-crm/crm-architecture-design.html" },
+    { "src": "/service-crm/data-migration-cleansing",   "dest": "/service-crm/data-migration-cleansing.html" },
+    { "src": "/service-crm/pipeline-forecast-setup",    "dest": "/service-crm/pipeline-forecast-setup.html" },
+    { "src": "/service-crm/email-sequence-integration", "dest": "/service-crm/email-sequence-integration.html" },
+    { "src": "/service-crm/reporting-dashboards",       "dest": "/service-crm/reporting-dashboards.html" },
+    { "src": "/service-crm/ongoing-admin-optimization", "dest": "/service-crm/ongoing-admin-optimization.html" },
+    { "src": "/service-crm",     "dest": "/service-crm.html" },
+    { "src": "/service-rpa",     "dest": "/service-rpa.html" },
+    { "src": "/service-funnels", "dest": "/service-funnels.html" },
+    { "src": "/service-revops",  "dest": "/service-revops.html" },
+    { "src": "/our-approach",    "dest": "/our-approach.html" },
+    { "src": "/who-we-are",      "dest": "/who-we-are.html" },
+    { "src": "/insights",        "dest": "/insights.html" },
+    { "src": "/contact",         "dest": "/contact.html" },
+    { "src": "/privacy",         "dest": "/privacy.html" },
+    { "src": "/security",        "dest": "/security.html" },
+    { "src": "/terms",           "dest": "/terms.html" },
+    { "src": "/",                "dest": "/index.html" }
+  ]
+}
