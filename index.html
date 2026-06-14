@@ -536,98 +536,116 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 <!-- ══════════════════════════════════════════
      WHAT WE DO
 ══════════════════════════════════════════ -->
-<section class="um-outer" id="services">
-  <div class="um-wrap">
+<section id="services" style="padding:96px 0;background:#fff;">
+  <div style="max-width:1300px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
 
+    <!-- LEFT TEXT -->
     <div>
-      <div class="sec-label fade-up">Process IQ</div>
-      <h2 class="sec-h2 fade-up fd1" style="font-size:clamp(30px,3.5vw,54px);line-height:1.05;margin-bottom:22px;font-weight:700;">Built on Automation.<br/>Designed for impact.</h2>
-      <p class="sec-sub fade-up fd2">From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.</p>
-      <a href="/contact" class="fade-up fd3" style="display:inline-flex;align-items:center;gap:10px;border:1.5px solid #1a2332;border-radius:2px;padding:13px 22px;font-size:14px;font-weight:500;color:#1a2332;text-decoration:none;margin-top:8px;"
-         onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'"
+      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#0a7c8c;margin-bottom:12px;">Process IQ</div>
+      <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,3.5vw,54px);font-weight:700;color:#0d1b2a;line-height:1.05;margin-bottom:22px;">Built on Automation.<br/>Designed for impact.</h2>
+      <p style="font-size:15px;color:#4a5568;line-height:1.85;max-width:520px;margin-bottom:28px;">From CRM systems that learn to RPA bots that act, Process IQ solutions reimagine the enterprise — creating an intelligent, automated foundation for lasting business impact.</p>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:10px;border:1.5px solid #1a2332;border-radius:2px;padding:13px 22px;font-size:14px;font-weight:500;color:#1a2332;text-decoration:none;"
+         onmouseover="this.style.borderColor='#0a7c8c';this.style.color='#0a7c8c'"
          onmouseout="this.style.borderColor='#1a2332';this.style.color='#1a2332'">
         Explore our solutions
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
 
-    <div class="piq-grid-container">
+    <!-- RIGHT: MOSAIC — all inline, no external CSS dependency -->
+    <div style="position:relative;display:flex;gap:16px;width:100%;max-width:560px;margin-left:auto;">
 
-      <div class="piq-col">
+      <!-- COL 1 -->
+      <div style="display:flex;flex-direction:column;gap:16px;flex:1;">
 
-        <!-- CRM Architecture — small by default -->
-        <div class="piq-card piq-c1" id="piq-crm" onclick="piqExpand(this)">
-          <div class="piq-v-collapsed">
-            <div class="piq-v-title">CRM Architecture</div>
-            <div class="piq-v-plus">+</div>
+        <!-- CARD 1: CRM (small) -->
+        <div onclick="piqExpand(this)" id="piq-crm"
+          style="height:250px;border-radius:4px;overflow:hidden;cursor:pointer;position:relative;
+                 background:linear-gradient(155deg,#0c1e2c 0%,#0a3a54 50%,#0a5472 100%);
+                 transition:height .42s cubic-bezier(.4,0,.2,1);">
+          <!-- collapsed view -->
+          <div class="piq-cv" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 60%);transition:opacity .35s;">
+            <div style="font-size:17px;font-weight:600;color:#fff;margin-bottom:14px;">CRM Architecture</div>
+            <div style="position:absolute;bottom:14px;right:16px;width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:300;line-height:0;">+</div>
           </div>
-          <div class="piq-v-expanded">
-            <div class="piq-v-photo" style="background-image:url('/img-crm.jpg');"></div>
-            <div class="piq-v-panel">
-              <div class="piq-v-panel-title">CRM Architecture</div>
-              <div class="piq-v-panel-desc">Full pipeline visibility from first touch to closed-won — 98% data accuracy, zero silos.</div>
-              <a href="/service-crm" class="piq-v-panel-link">&#8594;</a>
+          <!-- expanded view -->
+          <div class="piq-ev" style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s;">
+            <div style="flex:1;background:linear-gradient(160deg,#0a2030,#0a4060,#0a6882);background-size:cover;background-position:center;"></div>
+            <div style="background:#0a7c8c;padding:20px 22px;">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:19px;font-weight:600;color:#fff;margin-bottom:8px;">CRM Architecture</div>
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:10px;">Full pipeline visibility — 98% data accuracy, zero silos.</div>
+              <a href="/service-crm" style="font-size:20px;color:#fff;text-decoration:none;">&#8594;</a>
             </div>
           </div>
         </div>
 
-        <!-- RPA Automation — BIG active by default -->
-        <div class="piq-card piq-c2 piq-active" id="piq-rpa" onclick="piqExpand(this)">
-          <div class="piq-v-collapsed">
-            <div class="piq-v-title">RPA Automation</div>
-            <div class="piq-v-plus">+</div>
+        <!-- CARD 3: RPA (BIG active by default) -->
+        <div onclick="piqExpand(this)" id="piq-rpa"
+          style="height:516px;border-radius:4px;overflow:hidden;cursor:default;position:relative;
+                 background:linear-gradient(155deg,#054f58 0%,#0a7080 50%,#0d90a2 100%);
+                 transition:height .42s cubic-bezier(.4,0,.2,1);">
+          <div class="piq-cv" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 60%);transition:opacity .35s;opacity:0;pointer-events:none;">
+            <div style="font-size:17px;font-weight:600;color:#fff;margin-bottom:14px;">RPA Automation</div>
+            <div style="position:absolute;bottom:14px;right:16px;width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:300;line-height:0;">+</div>
           </div>
-          <div class="piq-v-expanded">
-            <div class="piq-v-photo" style="background-image:url('/img-rpa.jpg');"></div>
-            <div class="piq-v-panel">
-              <div class="piq-v-panel-title">RPA Automation</div>
-              <div class="piq-v-panel-desc">78% of manual ops replaced. Eliminate bottlenecks across your entire stack — from lead routing to compliance reporting.</div>
-              <a href="/service-rpa" class="piq-v-panel-link">&#8594;</a>
+          <div class="piq-ev" style="position:absolute;inset:0;display:flex;flex-direction:column;transition:opacity .35s;opacity:1;pointer-events:auto;">
+            <div style="flex:1;background:linear-gradient(160deg,#065868,#0a8090,#0daabf);background-size:cover;background-position:center;"></div>
+            <div style="background:#0a7c8c;padding:20px 22px;">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:19px;font-weight:600;color:#fff;margin-bottom:8px;">RPA Automation</div>
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:10px;">78% of manual ops replaced — eliminate bottlenecks from lead routing to compliance.</div>
+              <a href="/service-rpa" style="font-size:20px;color:#fff;text-decoration:none;">&#8594;</a>
             </div>
           </div>
         </div>
 
-      </div>
+      </div><!-- /col1 -->
 
-      <div class="piq-iq-badge">IQ</div>
+      <!-- IQ BADGE -->
+      <div style="position:absolute;top:250px;left:50%;transform:translate(-50%,-50%);background:#fff;color:#0d1b2a;width:70px;height:70px;display:flex;justify-content:center;align-items:center;font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:800;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.15);border-radius:2px;pointer-events:none;letter-spacing:-1px;">IQ</div>
 
-      <div class="piq-col">
+      <!-- COL 2 -->
+      <div style="display:flex;flex-direction:column;gap:16px;flex:1;">
 
-        <!-- Growth Funnels — small -->
-        <div class="piq-card piq-c3" id="piq-funnels" onclick="piqExpand(this)">
-          <div class="piq-v-collapsed">
-            <div class="piq-v-title">Growth Funnels</div>
-            <div class="piq-v-plus">+</div>
+        <!-- CARD 2: Growth Funnels (small) -->
+        <div onclick="piqExpand(this)" id="piq-funnels"
+          style="height:250px;border-radius:4px;overflow:hidden;cursor:pointer;position:relative;
+                 background:linear-gradient(155deg,#052e3a 0%,#086878 50%,#0a96aa 100%);
+                 transition:height .42s cubic-bezier(.4,0,.2,1);">
+          <div class="piq-cv" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 60%);transition:opacity .35s;">
+            <div style="font-size:17px;font-weight:600;color:#fff;margin-bottom:14px;">Growth Funnels</div>
+            <div style="position:absolute;bottom:14px;right:16px;width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:300;line-height:0;">+</div>
           </div>
-          <div class="piq-v-expanded">
-            <div class="piq-v-photo" style="background-image:url('/img-funnels.jpg');"></div>
-            <div class="piq-v-panel">
-              <div class="piq-v-panel-title">Growth Funnels</div>
-              <div class="piq-v-panel-desc">3.1× average ROAS lift. Every ad dollar traced to closed revenue with full CRM attribution.</div>
-              <a href="/service-funnels" class="piq-v-panel-link">&#8594;</a>
+          <div class="piq-ev" style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s;">
+            <div style="flex:1;background:linear-gradient(160deg,#042830,#076070,#0a8898);background-size:cover;background-position:center;"></div>
+            <div style="background:#0a7c8c;padding:20px 22px;">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:19px;font-weight:600;color:#fff;margin-bottom:8px;">Growth Funnels</div>
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:10px;">3.1× average ROAS lift — every ad dollar traced to revenue.</div>
+              <a href="/service-funnels" style="font-size:20px;color:#fff;text-decoration:none;">&#8594;</a>
             </div>
           </div>
         </div>
 
-        <!-- Revenue Ops — small -->
-        <div class="piq-card piq-c4" id="piq-revops" onclick="piqExpand(this)">
-          <div class="piq-v-collapsed">
-            <div class="piq-v-title">Revenue Ops</div>
-            <div class="piq-v-plus">+</div>
+        <!-- CARD 4: Revenue Ops (small) -->
+        <div onclick="piqExpand(this)" id="piq-revops"
+          style="height:250px;border-radius:4px;overflow:hidden;cursor:pointer;position:relative;
+                 background:linear-gradient(155deg,#0a566a 0%,#0a7080 50%,#0a8e9e 100%);
+                 transition:height .42s cubic-bezier(.4,0,.2,1);">
+          <div class="piq-cv" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 60%);transition:opacity .35s;">
+            <div style="font-size:17px;font-weight:600;color:#fff;margin-bottom:14px;">Revenue Ops</div>
+            <div style="position:absolute;bottom:14px;right:16px;width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:300;line-height:0;">+</div>
           </div>
-          <div class="piq-v-expanded">
-            <div class="piq-v-photo" style="background-image:url('/img-revops.jpg');"></div>
-            <div class="piq-v-panel">
-              <div class="piq-v-panel-title">Revenue Ops</div>
-              <div class="piq-v-panel-desc">One revenue view, zero blind spots. −55% reporting overhead. Pipeline, forecast &amp; attribution unified.</div>
-              <a href="/service-revops" class="piq-v-panel-link">&#8594;</a>
+          <div class="piq-ev" style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .35s;">
+            <div style="flex:1;background:linear-gradient(160deg,#0e2235,#0a3245,#0a4860);background-size:cover;background-position:center;"></div>
+            <div style="background:#0a7c8c;padding:20px 22px;">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:19px;font-weight:600;color:#fff;margin-bottom:8px;">Revenue Ops</div>
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:10px;">One revenue view, zero blind spots — −55% reporting overhead.</div>
+              <a href="/service-revops" style="font-size:20px;color:#fff;text-decoration:none;">&#8594;</a>
             </div>
           </div>
         </div>
 
-      </div>
-
-    </div>
+      </div><!-- /col2 -->
+    </div><!-- /mosaic -->
   </div>
 </section>
 
@@ -909,6 +927,37 @@ function handleSubmit(btn) {
       el.classList.add('visible');
     });
   }, 500);
+
+
+  // ── MOSAIC EXPAND ──────────────────────────────────────────────────────────
+  (function() {
+    // Cards: [id, small-height, big-height]
+    var cards = ['piq-crm','piq-rpa','piq-funnels','piq-revops'];
+    var SMALL = '250px', BIG = '516px';
+
+    window.piqExpand = function(clicked) {
+      var clickedId = clicked.id;
+      cards.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var cv = el.querySelector('.piq-cv');
+        var ev = el.querySelector('.piq-ev');
+        if (id === clickedId) {
+          // expand this card
+          el.style.height = BIG;
+          el.style.cursor = 'default';
+          if (cv) { cv.style.opacity = '0'; cv.style.pointerEvents = 'none'; }
+          if (ev) { ev.style.opacity = '1'; ev.style.pointerEvents = 'auto'; }
+        } else {
+          // collapse other cards
+          el.style.height = SMALL;
+          el.style.cursor = 'pointer';
+          if (cv) { cv.style.opacity = '1'; cv.style.pointerEvents = 'auto'; }
+          if (ev) { ev.style.opacity = '0'; ev.style.pointerEvents = 'none'; }
+        }
+      });
+    };
+  })();
 
 </script>
 </body>
