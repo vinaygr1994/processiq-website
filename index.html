@@ -285,123 +285,7 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
 }
 
 
-    /* ══ PIQ MOSAIC v10 — complete rewrite ══ */
-    .um-outer { padding:96px 0; background:#fff; }
-    .um-wrap {
-      max-width:1300px; margin:0 auto; padding:0 48px;
-      display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center;
-    }
-    .piq-grid-container {
-      position:relative; display:flex; gap:16px;
-      max-width:600px; margin-left:auto;
-    }
-    .piq-col { display:flex; flex-direction:column; gap:16px; flex:1; }
 
-    /* IQ badge */
-    .piq-iq-badge {
-      position:absolute; top:250px; left:50%;
-      transform:translate(-50%,-50%);
-      background:#fff; color:#0d1b2a;
-      width:70px; height:70px;
-      display:flex; justify-content:center; align-items:center;
-      font-family:'Playfair Display',Georgia,serif;
-      font-size:24px; font-weight:800;
-      z-index:10; box-shadow:0 4px 16px rgba(0,0,0,.15);
-      border-radius:2px; pointer-events:none; letter-spacing:-1px;
-    }
-
-    /* Card base */
-    .piq-card {
-      position:relative;
-      height:250px;
-      border-radius:4px;
-      overflow:hidden;
-      cursor:pointer;
-      transition:height .42s cubic-bezier(.4,0,.2,1);
-    }
-    .piq-card.piq-active { height:516px; cursor:default; }
-
-    /* Card backgrounds — set directly on the card */
-    .piq-c1 { background:linear-gradient(155deg,#0c1e2c 0%,#0a3a54 50%,#0a5472 100%); }
-    .piq-c2 { background:linear-gradient(155deg,#054f58 0%,#0a7080 50%,#0d90a2 100%); }
-    .piq-c3 { background:linear-gradient(155deg,#052e3a 0%,#086878 50%,#0a96aa 100%); }
-    .piq-c4 { background:linear-gradient(155deg,#0a566a 0%,#0a7080 50%,#0a8e9e 100%); }
-
-    /* ── COLLAPSED VIEW (shows when NOT active) ── */
-    .piq-v-collapsed {
-      position:absolute; inset:0;
-      display:flex; flex-direction:column;
-      justify-content:flex-end;
-      padding:20px;
-      /* dark gradient from bottom for text readability */
-      background:linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 60%);
-      z-index:1;
-      transition:opacity .35s ease;
-    }
-    .piq-card.piq-active .piq-v-collapsed {
-      opacity:0;
-      pointer-events:none;
-    }
-    .piq-v-title {
-      font-size:18px; font-weight:600; color:#fff;
-      line-height:1.3; margin-bottom:14px;
-    }
-    .piq-v-plus {
-      position:absolute; bottom:14px; right:16px;
-      width:30px; height:30px; border-radius:50%;
-      border:1.5px solid rgba(255,255,255,.65);
-      display:flex; align-items:center; justify-content:center;
-      color:#fff; font-size:20px; font-weight:300; line-height:0;
-    }
-
-    /* ── EXPANDED VIEW (shows when active) ── */
-    .piq-v-expanded {
-      position:absolute; inset:0;
-      display:flex; flex-direction:column;
-      z-index:1;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .35s ease;
-    }
-    .piq-card.piq-active .piq-v-expanded {
-      opacity:1;
-      pointer-events:auto;
-    }
-    /* Photo top half */
-    .piq-v-photo {
-      flex:1;
-      background-size:cover;
-      background-position:center;
-      min-height:0;
-    }
-    /* Teal panel bottom half */
-    .piq-v-panel {
-      background:#0a7c8c;
-      padding:20px 22px 22px;
-      flex-shrink:0;
-    }
-    .piq-v-panel-title {
-      font-family:'Playfair Display',Georgia,serif;
-      font-size:20px; font-weight:600; color:#fff;
-      margin-bottom:9px; line-height:1.2;
-    }
-    .piq-v-panel-desc {
-      font-size:13px; font-weight:600;
-      color:rgba(255,255,255,.9);
-      line-height:1.6; margin-bottom:12px;
-    }
-    .piq-v-panel-link {
-      display:inline-block;
-      font-size:22px; color:#fff;
-      text-decoration:none;
-    }
-
-    @media(max-width:1100px){ .um-wrap { grid-template-columns:1fr; } }
-    @media(max-width:600px){
-      .piq-grid-container { flex-direction:column; max-width:100%; }
-      .piq-iq-badge { display:none; }
-      .piq-card.piq-active { height:420px; }
-    }
   </style>
 </head>
 <body>
@@ -915,11 +799,7 @@ function handleSubmit(btn) {
   }, 1200);
 }
 
-  function piqExpand(card) {
-    if (card.classList.contains('piq-active')) return;
-    document.querySelectorAll('.piq-card').forEach(function(c) { c.classList.remove('piq-active'); });
-    card.classList.add('piq-active');
-  }
+
 
   // Fallback: ensure fade-up elements are visible even if observer misses them
   setTimeout(function() {
