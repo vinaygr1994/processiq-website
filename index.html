@@ -551,7 +551,7 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       </a>
     </div>
 
-    <div class="piq-grid-container fade-up fd2">
+    <div class="piq-grid-container">
 
       <div class="piq-col">
 
@@ -783,7 +783,7 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY
 // ── SCROLL FADE-UP ──
 const fo = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');fo.unobserve(e.target);} });
-}, {threshold:0.1});
+}, {threshold:0.05});
 document.querySelectorAll('.fade-up').forEach(el => fo.observe(el));
 
 // ── BAR FILLS ──
@@ -902,6 +902,14 @@ function handleSubmit(btn) {
     document.querySelectorAll('.piq-card').forEach(function(c) { c.classList.remove('piq-active'); });
     card.classList.add('piq-active');
   }
+
+  // Fallback: ensure fade-up elements are visible even if observer misses them
+  setTimeout(function() {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }, 500);
+
 </script>
 </body>
 </html>
