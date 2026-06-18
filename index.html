@@ -607,6 +607,14 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
         <select class="finput" data-field="challenge"><option value="">Select challenge...</option><option>CRM disorganization / pipeline gaps</option><option>Poor ad attribution / ROAS</option><option>Manual process overload</option><option>Revenue reporting blind spots</option></select>
       </div>
       <div class="fgroup"><label class="flabel">Describe your challenge</label><textarea class="finput" rows="3" placeholder="Current stack, blockers, revenue goals..." style="resize:vertical;" data-field="message"></textarea></div>
+      <div class="ciq-consent" style="margin:6px 0 16px;padding:16px 18px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;">
+        <p style="font-size:12.5px;color:#4a5568;line-height:1.6;margin:0 0 12px;">By checking the box below, you agree to receive communications from Process IQ Automation. You can unsubscribe anytime.</p>
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:#1a2332;line-height:1.55;">
+          <input type="checkbox" data-field="consent" style="margin-top:2px;width:16px;height:16px;accent-color:#0a7c8c;flex-shrink:0;cursor:pointer;"/>
+          <span>I agree to receive other communications from Process IQ Automation.<span style="color:#0a7c8c;">*</span></span>
+        </label>
+        <p style="font-size:11.5px;color:#718096;line-height:1.55;margin:12px 0 0;">We care about your privacy. Learn how we handle your data in our <a href="/privacy" style="color:#0a7c8c;text-decoration:none;border-bottom:1px solid rgba(10,124,140,.3);">Privacy Policy</a>. To deliver your service, we need your permission to store and process your personal data.</p>
+      </div>
       <button class="btn-submit" onclick="handleSubmit(this)">Submit Request</button>
       <p class="fmicro">Response within 1 business day · No spam · Cancel anytime</p>
     </div>
@@ -757,8 +765,10 @@ function handleSubmit(btn) {
   function val(f){ var el = card.querySelector('[data-field="'+f+'"]'); return el ? el.value.trim() : ''; }
   var first=val('firstName'), last=val('lastName'), email=val('email'),
       company=val('company'), challenge=val('challenge'), message=val('message');
+  var consentEl=card.querySelector('[data-field="consent"]');
   if(!first||!last||!email){ btn.textContent='Please fill name & email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
   var re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; if(!re.test(email)){ btn.textContent='Enter a valid email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
+  if(!consentEl||!consentEl.checked){ btn.textContent='Please agree to continue'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
   var gf = document.getElementById('ciq_gf_form');
   gf.querySelector('[name="entry.1398501445"]').value = first;
   gf.querySelector('[name="entry.539645325"]').value = last;
@@ -766,6 +776,7 @@ function handleSubmit(btn) {
   gf.querySelector('[name="entry.1999670932"]').value = company;
   gf.querySelector('[name="entry.101725967"]').value = challenge;
   gf.querySelector('[name="entry.363704270"]').value = message;
+  gf.querySelector('[name="entry.860463122"]').value = "I agree to receive other communications from Process IQ Automation.* We care about your privacy. Learn how we handle your data in our Privacy Policy.To deliver your service, we need your permission to store and process your personal data.";
   btn.textContent = 'Sending...';
   btn.style.background = 'var(--teal-dk)';
   btn.disabled = true;
@@ -826,6 +837,7 @@ function handleSubmit(btn) {
   <input type="hidden" name="entry.1999670932"/>
   <input type="hidden" name="entry.101725967"/>
   <input type="hidden" name="entry.363704270"/>
+  <input type="hidden" name="entry.860463122"/>
 </form>
 <script>function piqExpand(index){var g=document.getElementById('piqGrid');if(!g)return;g.classList.remove('piq-a1','piq-a2','piq-a3','piq-a4');g.classList.add('piq-a'+index);}</script>
 </body>
