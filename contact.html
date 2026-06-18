@@ -202,19 +202,19 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
     <div class="form-title">Request a Consultation</div>
     <div class="form-sub">A senior architect responds within 1 business day.</div>
     <div class="fg2">
-      <div class="fgroup"><label class="flabel">First name</label><input class="finput" type="text" placeholder="Alex"/></div>
-      <div class="fgroup"><label class="flabel">Last name</label><input class="finput" type="text" placeholder="Morgan"/></div>
+      <div class="fgroup"><label class="flabel">First name</label><input id="ciq_first" class="finput" type="text" placeholder="Alex"/></div>
+      <div class="fgroup"><label class="flabel">Last name</label><input id="ciq_last" class="finput" type="text" placeholder="Morgan"/></div>
     </div>
-    <div class="fgroup"><label class="flabel">Work email</label><input class="finput" type="email" placeholder="alex@company.com"/></div>
-    <div class="fgroup"><label class="flabel">Company</label><input class="finput" type="text" placeholder="Acme Corp"/></div>
+    <div class="fgroup"><label class="flabel">Work email</label><input id="ciq_email" class="finput" type="email" placeholder="alex@company.com"/></div>
+    <div class="fgroup"><label class="flabel">Company</label><input id="ciq_company" class="finput" type="text" placeholder="Acme Corp"/></div>
     <div class="fgroup"><label class="flabel">Company size</label>
-      <select class="finput"><option value="">Select size...</option><option>1–10 employees</option><option>10–50 employees</option><option>50–200 employees</option><option>200–1000 employees</option><option>1000+ employees</option></select>
+      <select id="ciq_size" class="finput"><option value="">Select size...</option><option>1–10 employees</option><option>10–50 employees</option><option>50–200 employees</option><option>200–1000 employees</option><option>1000+ employees</option></select>
     </div>
     <div class="fgroup"><label class="flabel">Primary challenge</label>
-      <select class="finput"><option value="">Select challenge...</option><option>CRM disorganization / pipeline gaps</option><option>Poor ad attribution / ROAS</option><option>Manual process overload</option><option>Revenue reporting blind spots</option><option>Cross-system data silos</option></select>
+      <select id="ciq_challenge" class="finput"><option value="">Select challenge...</option><option>CRM disorganization / pipeline gaps</option><option>Poor ad attribution / ROAS</option><option>Manual process overload</option><option>Revenue reporting blind spots</option><option>Cross-system data silos</option></select>
     </div>
-    <div class="fgroup"><label class="flabel">Tell us about your challenge</label><textarea class="finput" rows="4" placeholder="Current stack, key blockers, and revenue goals..." style="resize:vertical;"></textarea></div>
-    <button class="btn-submit" onclick="this.textContent='Sending...';this.disabled=true;setTimeout(()=>{this.textContent='Request Submitted ✓';this.style.background='#047857';},1200)">Submit Request</button>
+    <div class="fgroup"><label class="flabel">Tell us about your challenge</label><textarea id="ciq_details" class="finput" rows="4" placeholder="Current stack, key blockers, and revenue goals..." style="resize:vertical;"></textarea></div>
+    <button id="ciq_submit" class="btn-submit" onclick="submitConsult(this)">Submit Request</button>
     <p class="fmicro">Response within 1 business day · No spam · Cancel anytime</p>
   </div>
 </div>
@@ -247,6 +247,40 @@ const nav=document.getElementById('main-nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
 const fo=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');fo.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.fade-up').forEach(el=>fo.observe(el));
+</script>
+
+<iframe name="ciq_gf_sink" style="display:none;" aria-hidden="true"></iframe>
+<form id="ciq_gf_form" action="https://docs.google.com/forms/d/e/1FAIpQLScAvEtbtyv_6G5-_uCOk7mBwgs2Hsz5o8OL60LU4oSGPo-UmQ/formResponse" method="POST" target="ciq_gf_sink" style="display:none;">
+  <input type="hidden" name="entry.1398501445" id="gf_first"/>
+  <input type="hidden" name="entry.539645325" id="gf_last"/>
+  <input type="hidden" name="entry.2034241251" id="gf_email"/>
+  <input type="hidden" name="entry.1999670932" id="gf_company"/>
+  <input type="hidden" name="entry.1005249383" id="gf_size"/>
+  <input type="hidden" name="entry.101725967" id="gf_challenge"/>
+  <input type="hidden" name="entry.363704270" id="gf_details"/>
+</form>
+<script>
+function submitConsult(btn){
+  var first=document.getElementById('ciq_first').value.trim();
+  var last=document.getElementById('ciq_last').value.trim();
+  var email=document.getElementById('ciq_email').value.trim();
+  var company=document.getElementById('ciq_company').value.trim();
+  var size=document.getElementById('ciq_size').value;
+  var challenge=document.getElementById('ciq_challenge').value;
+  var details=document.getElementById('ciq_details').value.trim();
+  if(!first||!last||!email){ btn.textContent='Please fill name & email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
+  var re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; if(!re.test(email)){ btn.textContent='Enter a valid email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
+  document.getElementById('gf_first').value=first;
+  document.getElementById('gf_last').value=last;
+  document.getElementById('gf_email').value=email;
+  document.getElementById('gf_company').value=company;
+  document.getElementById('gf_size').value=size;
+  document.getElementById('gf_challenge').value=challenge;
+  document.getElementById('gf_details').value=details;
+  btn.textContent='Sending...'; btn.disabled=true;
+  document.getElementById('ciq_gf_form').submit();
+  setTimeout(function(){ btn.textContent='Request Submitted ✓'; btn.style.background='#047857'; },1200);
+}
 </script>
 </body>
 </html>
