@@ -790,9 +790,23 @@ document.querySelectorAll('.ust-card').forEach(card => {
 
 // ── FORM SUBMIT ──
 function handleSubmit(btn) {
+  var card = btn.closest('.form-card');
+  function val(f){ var el = card.querySelector('[data-field="'+f+'"]'); return el ? el.value.trim() : ''; }
+  var first=val('firstName'), last=val('lastName'), email=val('email'),
+      company=val('company'), challenge=val('challenge'), message=val('message');
+  if(!first||!last||!email){ btn.textContent='Please fill name & email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
+  var re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; if(!re.test(email)){ btn.textContent='Enter a valid email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
+  var gf = document.getElementById('ciq_gf_form');
+  gf.querySelector('[name="entry.1398501445"]').value = first;
+  gf.querySelector('[name="entry.539645325"]').value = last;
+  gf.querySelector('[name="entry.2034241251"]').value = email;
+  gf.querySelector('[name="entry.1999670932"]').value = company;
+  gf.querySelector('[name="entry.101725967"]').value = challenge;
+  gf.querySelector('[name="entry.363704270"]').value = message;
   btn.textContent = 'Sending...';
   btn.style.background = 'var(--teal-dk)';
   btn.disabled = true;
+  gf.submit();
   setTimeout(() => {
     btn.textContent = 'Request Submitted ✓';
     btn.style.background = '#047857';
@@ -840,5 +854,15 @@ function handleSubmit(btn) {
   })();
 
 </script>
+
+<iframe name="ciq_gf_sink" style="display:none;" aria-hidden="true"></iframe>
+<form id="ciq_gf_form" action="https://docs.google.com/forms/d/e/1FAIpQLScAvEtbtyv_6G5-_uCOk7mBwgs2Hsz5o8OL60LU4oSGPo-UmQ/formResponse" method="POST" target="ciq_gf_sink" style="display:none;">
+  <input type="hidden" name="entry.1398501445"/>
+  <input type="hidden" name="entry.539645325"/>
+  <input type="hidden" name="entry.2034241251"/>
+  <input type="hidden" name="entry.1999670932"/>
+  <input type="hidden" name="entry.101725967"/>
+  <input type="hidden" name="entry.363704270"/>
+</form>
 </body>
 </html>
