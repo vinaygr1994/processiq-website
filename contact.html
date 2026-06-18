@@ -214,6 +214,14 @@ select.finput{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xm
       <select id="ciq_challenge" class="finput"><option value="">Select challenge...</option><option>CRM disorganization / pipeline gaps</option><option>Poor ad attribution / ROAS</option><option>Manual process overload</option><option>Revenue reporting blind spots</option><option>Cross-system data silos</option></select>
     </div>
     <div class="fgroup"><label class="flabel">Tell us about your challenge</label><textarea id="ciq_details" class="finput" rows="4" placeholder="Current stack, key blockers, and revenue goals..." style="resize:vertical;"></textarea></div>
+    <div class="ciq-consent" style="margin:6px 0 16px;padding:16px 18px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;">
+      <p style="font-size:12.5px;color:#4a5568;line-height:1.6;margin:0 0 12px;">By checking the box below, you agree to receive communications from Process IQ Automation. You can unsubscribe anytime.</p>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:#1a2332;line-height:1.55;">
+        <input type="checkbox" id="ciq_consent" style="margin-top:2px;width:16px;height:16px;accent-color:#0a7c8c;flex-shrink:0;cursor:pointer;"/>
+        <span>I agree to receive other communications from Process IQ Automation.<span style="color:#0a7c8c;">*</span></span>
+      </label>
+      <p style="font-size:11.5px;color:#718096;line-height:1.55;margin:12px 0 0;">We care about your privacy. Learn how we handle your data in our <a href="/privacy" style="color:#0a7c8c;text-decoration:none;border-bottom:1px solid rgba(10,124,140,.3);">Privacy Policy</a>. To deliver your service, we need your permission to store and process your personal data.</p>
+    </div>
     <button id="ciq_submit" class="btn-submit" onclick="submitConsult(this)">Submit Request</button>
     <p class="fmicro">Response within 1 business day · No spam · Cancel anytime</p>
   </div>
@@ -258,6 +266,7 @@ document.querySelectorAll('.fade-up').forEach(el=>fo.observe(el));
   <input type="hidden" name="entry.1005249383" id="gf_size"/>
   <input type="hidden" name="entry.101725967" id="gf_challenge"/>
   <input type="hidden" name="entry.363704270" id="gf_details"/>
+  <input type="hidden" name="entry.860463122" id="gf_consent"/>
 </form>
 <script>
 function submitConsult(btn){
@@ -270,6 +279,8 @@ function submitConsult(btn){
   var details=document.getElementById('ciq_details').value.trim();
   if(!first||!last||!email){ btn.textContent='Please fill name & email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
   var re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; if(!re.test(email)){ btn.textContent='Enter a valid email'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
+  var consent=document.getElementById('ciq_consent');
+  if(!consent||!consent.checked){ btn.textContent='Please agree to continue'; setTimeout(function(){btn.textContent='Submit Request';},1800); return; }
   document.getElementById('gf_first').value=first;
   document.getElementById('gf_last').value=last;
   document.getElementById('gf_email').value=email;
@@ -277,6 +288,7 @@ function submitConsult(btn){
   document.getElementById('gf_size').value=size;
   document.getElementById('gf_challenge').value=challenge;
   document.getElementById('gf_details').value=details;
+  document.getElementById('gf_consent').value="I agree to receive other communications from Process IQ Automation.* We care about your privacy. Learn how we handle your data in our Privacy Policy.To deliver your service, we need your permission to store and process your personal data.";
   btn.textContent='Sending...'; btn.disabled=true;
   document.getElementById('ciq_gf_form').submit();
   setTimeout(function(){ btn.textContent='Request Submitted ✓'; btn.style.background='#047857'; },1200);
