@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CRM Setup &amp; Implementation — Process IQ Automation</title>
+<meta name="description" content="Get your CRM set up right the first time, with automation built in from day one. Book a free CRM setup consultation with a senior implementation specialist."/>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--teal:#0a7c8c;--teal-lt:#12a8bc;--teal-dk:#065f6b;--teal-bg:#e8f6f8;--dark:#0d1b2a;--dark2:#1a2f42;--off:#f4f5f6;--mid:#4a5568;--lt:#718096;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--dark);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden;}
+img{max-width:100%;height:auto;}
+a{color:inherit;}
+
+/* Minimal top bar — logo only, no nav links, no distraction */
+.lp-topbar{padding:22px 0;background:#fff;border-bottom:1px solid #eef2f6;}
+.lp-topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;}
+.lp-logo{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--dark);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.lp-logo .mark{width:34px;height:34px;border:1.5px solid var(--teal);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:14px;color:var(--dark);flex-shrink:0;}
+.lp-topbar-trust{font-size:12px;color:var(--lt);font-weight:600;display:flex;align-items:center;gap:6px;}
+.lp-topbar-trust svg{color:var(--teal);}
+
+/* Hero + form */
+.lp-hero{position:relative;background:var(--dark);background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3IqZwxhFvQowTQbNPwhIT2yDlnw/hf_20260904_040607_5e40a2e1-2a52-4ca2-89d7-9b6f03f4a855.png');background-size:cover;background-position:center;padding:64px 0 72px;}
+.lp-hero-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start;}
+.lp-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-lt);margin-bottom:18px;}
+.lp-h1{font-family:var(--serif);font-size:clamp(30px,4vw,48px);font-weight:600;color:#fff;line-height:1.15;margin-bottom:20px;}
+.lp-h1 em{font-style:italic;color:var(--teal-lt);}
+.lp-sub{font-size:17px;color:rgba(255,255,255,.78);line-height:1.7;max-width:520px;margin-bottom:30px;}
+.lp-bullets{display:flex;flex-direction:column;gap:14px;margin-bottom:8px;}
+.lp-bullet{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:rgba(255,255,255,.9);}
+.lp-bullet svg{color:var(--teal-lt);flex-shrink:0;margin-top:2px;}
+.lp-trustrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:34px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);}
+.lp-trust-item{display:flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(255,255,255,.65);font-weight:500;}
+.lp-trust-item svg{color:var(--teal-lt);}
+
+/* Form card */
+.lp-form-card{background:#fff;border-radius:14px;padding:34px 32px;box-shadow:0 24px 70px rgba(0,0,0,.28);}
+.lp-form-title{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--dark);margin-bottom:6px;}
+.lp-form-sub{font-size:13.5px;color:var(--mid);margin-bottom:24px;line-height:1.55;}
+.lp-fgroup{margin-bottom:16px;}
+.lp-frow2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.lp-label{display:block;font-size:12.5px;font-weight:600;color:var(--dark);margin-bottom:6px;}
+.lp-input,.lp-select,.lp-textarea{width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:14.5px;font-family:var(--sans);color:var(--dark);background:#fff;transition:border-color .15s;}
+.lp-input:focus,.lp-select:focus,.lp-textarea:focus{outline:none;border-color:var(--teal);}
+.lp-textarea{resize:vertical;min-height:72px;}
+.lp-consent{margin:18px 0 20px;padding:14px 16px;background:var(--off);border-radius:8px;}
+.lp-consent-intro{font-size:11.5px;color:var(--mid);line-height:1.55;margin-bottom:10px;}
+.lp-consent-check{display:flex;align-items:flex-start;gap:9px;cursor:pointer;font-size:12px;color:var(--dark);line-height:1.5;}
+.lp-consent-check input{margin-top:2px;width:15px;height:15px;accent-color:var(--teal);flex-shrink:0;cursor:pointer;}
+.lp-consent-note{font-size:10.5px;color:var(--lt);line-height:1.5;margin-top:10px;}
+.lp-consent-note a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(10,124,140,.3);}
+.lp-btn-submit{width:100%;background:var(--teal);color:#fff;border:none;border-radius:7px;padding:15px;font-size:15.5px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.lp-btn-submit:hover{background:var(--teal-dk);}
+.lp-fmicro{text-align:center;font-size:11.5px;color:var(--lt);margin-top:14px;}
+
+/* Sections below fold */
+.lp-section{padding:72px 0;}
+.lp-section-inner{max-width:1100px;margin:0 auto;padding:0 24px;}
+.lp-section-head{text-align:center;max-width:640px;margin:0 auto 44px;}
+.lp-section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+.lp-section-h2{font-family:var(--serif);font-size:clamp(24px,3vw,34px);font-weight:600;color:var(--dark);line-height:1.2;}
+
+.lp-results{background:var(--off);}
+.lp-results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;background:#fff;}
+.lp-result-cell{padding:28px 18px;text-align:center;border-right:1px solid #e2e8f0;}
+.lp-result-cell:last-child{border-right:none;}
+.lp-result-num{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--teal);line-height:1;}
+.lp-result-lbl{font-size:12px;color:var(--dark);font-weight:600;margin-top:8px;}
+.lp-result-sub{font-size:11px;color:var(--lt);margin-top:3px;}
+
+.lp-how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.lp-how-step{text-align:center;}
+.lp-how-num{width:46px;height:46px;border-radius:50%;background:var(--teal-bg);color:var(--teal);font-family:var(--serif);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.lp-how-title{font-size:15.5px;font-weight:700;color:var(--dark);margin-bottom:6px;}
+.lp-how-desc{font-size:13px;color:var(--mid);line-height:1.6;}
+
+.lp-final-cta{background:var(--dark);text-align:center;padding:64px 24px;}
+.lp-final-cta h2{font-family:var(--serif);font-size:clamp(24px,3vw,32px);font-weight:600;color:#fff;margin-bottom:14px;}
+.lp-final-cta p{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+.lp-btn-white{display:inline-flex;align-items:center;gap:9px;background:var(--teal-lt);color:var(--dark);font-weight:700;font-size:15px;text-decoration:none;padding:15px 32px;border-radius:7px;transition:background .2s;border:none;cursor:pointer;font-family:var(--sans);}
+.lp-btn-white:hover{background:#5dd8e5;}
+
+.lp-footer{padding:28px 24px;text-align:center;background:#fff;border-top:1px solid #eef2f6;}
+.lp-footer p{font-size:12px;color:var(--lt);}
+.lp-footer a{color:var(--lt);text-decoration:underline;}
+
+@media(max-width:900px){
+  .lp-hero-inner{grid-template-columns:1fr;gap:36px;}
+  .lp-results-grid{grid-template-columns:1fr 1fr;}
+  .lp-result-cell{border-bottom:1px solid #e2e8f0;}
+  .lp-how-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .lp-frow2{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .lp-topbar-trust{display:none;}
+  .lp-hero{padding:40px 0 48px;}
+  .lp-form-card{padding:26px 20px;}
+  .lp-results-grid{grid-template-columns:1fr 1fr;}
+  .lp-how-grid{grid-template-columns:1fr;}
+  .lp-section{padding:52px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- Minimal top bar: logo only, zero nav links (keeps 100% attention on the form) -->
+<div class="lp-topbar">
+  <div class="lp-topbar-inner">
+    <a class="lp-logo" href="/"><span class="mark">IQ</span> Process IQ Automation</a>
+    <div class="lp-topbar-trust">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Senior Implementation Specialists
+    </div>
+  </div>
+</div>
+
+<!-- Hero + form, above the fold -->
+<section class="lp-hero">
+  <div class="lp-hero-inner">
+    <div>
+      <div class="lp-eyebrow">CRM Setup &amp; Implementation</div>
+      <h1 class="lp-h1">Get Your CRM<br/><em>Set Up Right,</em><br/>the First Time.</h1>
+      <p class="lp-sub">Whether you're implementing a new CRM or starting over after a setup that never worked, we build your pipeline, automation, and reporting correctly from day one &mdash; not bolted on after the fact.</p>
+      <div class="lp-bullets">
+        <div class="lp-bullet"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Pipeline &amp; data architecture built for how you actually sell</div>
+        <div class="lp-bullet"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Automation and integrations set up from day one, not bolted on later</div>
+        <div class="lp-bullet"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Clean data migration if you're switching platforms</div>
+      </div>
+      <div class="lp-trustrow">
+        <div class="lp-trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security-Conscious Implementation</div>
+        <div class="lp-trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Senior-Only Delivery</div>
+      </div>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="lp-form-card" id="audit-form">
+      <div class="lp-form-title">Book a Free Setup Consultation</div>
+      <div class="lp-form-sub">Takes two minutes. A senior implementation specialist reviews your submission personally.</div>
+
+      <div class="lp-frow2">
+        <div class="lp-fgroup"><label class="lp-label">First name</label><input class="lp-input" type="text" placeholder="Alex" data-field="firstName"/></div>
+        <div class="lp-fgroup"><label class="lp-label">Last name</label><input class="lp-input" type="text" placeholder="Morgan" data-field="lastName"/></div>
+      </div>
+      <div class="lp-fgroup"><label class="lp-label">Work email</label><input class="lp-input" type="email" placeholder="alex@company.com" data-field="email"/></div>
+      <div class="lp-fgroup"><label class="lp-label">Company</label><input class="lp-input" type="text" placeholder="Acme Corp" data-field="company"/></div>
+      <div class="lp-fgroup">
+        <label class="lp-label">What do you need help with?</label>
+        <select class="lp-select" data-field="size">
+          <option value="">Select one...</option>
+          <option value="New CRM Setup">Setting up a CRM for the first time</option>
+          <option value="CRM Migration">Migrating from another platform</option>
+          <option value="CRM Cleanup + Automation">Fixing a CRM that was never set up properly</option>
+          <option value="Automation Setup">Adding automation to an existing CRM</option>
+          <option value="Reporting">Reporting &amp; dashboards</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="lp-fgroup">
+        <label class="lp-label">Anything else we should know? <span style="color:var(--lt);font-weight:400;">(optional)</span></label>
+        <textarea class="lp-textarea" placeholder="e.g. we don't have a CRM yet, or ours was never really set up..." data-field="details"></textarea>
+      </div>
+
+      <div class="lp-consent">
+        <p class="lp-consent-intro">By checking the box below, you agree to receive communications from Process IQ Automation. You can unsubscribe anytime.</p>
+        <label class="lp-consent-check">
+          <input type="checkbox" data-field="consent"/>
+          <span>I agree to receive other communications from Process IQ Automation.<span style="color:var(--teal);">*</span></span>
+        </label>
+        <p class="lp-consent-note">We care about your privacy. Learn how we handle your data in our <a href="/privacy">Privacy Policy</a>. To deliver your service, we need your permission to store and process your personal data.</p>
+      </div>
+
+      <button class="lp-btn-submit" onclick="handleSubmit(this)">Get My Free Setup Plan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      <p class="lp-fmicro">Response within 1 business day &middot; No spam &middot; Cancel anytime</p>
+
+      <!-- Hidden iframe + form: submits to the same Google Form backing the main site's contact form -->
+      <iframe name="lp_gf_sink" style="display:none;"></iframe>
+      <form id="lp_gf_form" action="https://docs.google.com/forms/d/e/1FAIpQLScAvEtbtyv_6G5-_uCOk7mBwgs2Hsz5o8OL60LU4oSGPo-UmQ/formResponse" method="POST" target="lp_gf_sink" style="display:none;">
+        <input type="hidden" name="entry.1398501445" id="gf_first"/>
+        <input type="hidden" name="entry.539645325" id="gf_last"/>
+        <input type="hidden" name="entry.2034241251" id="gf_email"/>
+        <input type="hidden" name="entry.1999670932" id="gf_company"/>
+        <input type="hidden" name="entry.1005249383" id="gf_size"/>
+        <input type="hidden" name="entry.101725967" id="gf_challenge"/>
+        <input type="hidden" name="entry.363704270" id="gf_details"/>
+        <input type="hidden" name="entry.860463122" id="gf_consent"/>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Results strip -->
+<section class="lp-section lp-results">
+  <div class="lp-section-inner">
+    <div class="lp-results-grid">
+      <div class="lp-result-cell"><div class="lp-result-num">$4M+</div><div class="lp-result-lbl">Revenue Attributed</div><div class="lp-result-sub">Across active client portfolios</div></div>
+      <div class="lp-result-cell"><div class="lp-result-num">142</div><div class="lp-result-lbl">Automations Deployed</div><div class="lp-result-sub">Live client workflows</div></div>
+      <div class="lp-result-cell"><div class="lp-result-num">3.1&times;</div><div class="lp-result-lbl">Average ROAS Lift</div><div class="lp-result-sub">Post-implementation</div></div>
+      <div class="lp-result-cell"><div class="lp-result-num">98%</div><div class="lp-result-lbl">CRM Data Accuracy</div><div class="lp-result-sub">Post-unification average</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="lp-section">
+  <div class="lp-section-inner">
+    <div class="lp-section-head">
+      <div class="lp-section-eyebrow">How It Works</div>
+      <h2 class="lp-section-h2">From kickoff to a fully set up CRM, in four steps</h2>
+    </div>
+    <div class="lp-how-grid">
+      <div class="lp-how-step"><div class="lp-how-num">01</div><div class="lp-how-title">Audit</div><div class="lp-how-desc">We analyze your CRM, processes, and bottlenecks.</div></div>
+      <div class="lp-how-step"><div class="lp-how-num">02</div><div class="lp-how-title">Design</div><div class="lp-how-desc">We identify automation opportunities and build your roadmap.</div></div>
+      <div class="lp-how-step"><div class="lp-how-num">03</div><div class="lp-how-title">Build</div><div class="lp-how-desc">We implement the CRM, integrations, and AI automation.</div></div>
+      <div class="lp-how-step"><div class="lp-how-num">04</div><div class="lp-how-title">Optimize</div><div class="lp-how-desc">We monitor performance and keep improving the system.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="lp-final-cta">
+  <h2>Ready to get your CRM set up right?</h2>
+  <p>No obligation. No sales pressure. Just a clear plan for getting your CRM and automation built correctly from the start.</p>
+  <button class="lp-btn-white" onclick="document.getElementById('audit-form').scrollIntoView({behavior:'smooth',block:'center'});">Book My Free Setup Consultation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+</section>
+
+<footer class="lp-footer">
+  <p>&copy; 2026 Process IQ Automation &middot; <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+function val(field){
+  var el = document.querySelector('[data-field="'+field+'"]');
+  return el ? el.value.trim() : '';
+}
+function handleSubmit(btn){
+  var first=val('firstName'), last=val('lastName'), email=val('email'),
+      company=val('company'), size=val('size'), details=val('details');
+  var consentEl = document.querySelector('[data-field="consent"]');
+  if(!first||!last||!email){
+    btn.textContent='Please fill name & email';
+    setTimeout(function(){ btn.innerHTML='Get My Free Setup Plan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'; }, 1800);
+    return;
+  }
+  var re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!re.test(email)){
+    btn.textContent='Enter a valid email';
+    setTimeout(function(){ btn.innerHTML='Get My Free Setup Plan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'; }, 1800);
+    return;
+  }
+  if(!consentEl || !consentEl.checked){
+    btn.textContent='Please agree to continue';
+    setTimeout(function(){ btn.innerHTML='Get My Free Setup Plan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'; }, 1800);
+    return;
+  }
+  document.getElementById('gf_first').value = first;
+  document.getElementById('gf_last').value = last;
+  document.getElementById('gf_email').value = email;
+  document.getElementById('gf_company').value = company;
+  document.getElementById('gf_size').value = size;
+  document.getElementById('gf_challenge').value = 'Google Ads Landing Page - CRM Setup';
+  document.getElementById('gf_details').value = details;
+  document.getElementById('gf_consent').value = 'I agree to receive other communications from Process IQ Automation.* We care about your privacy. Learn how we handle your data in our Privacy Policy.To deliver your service, we need your permission to store and process your personal data.';
+  document.getElementById('lp_gf_form').submit();
+  btn.textContent = 'Request Submitted \u2713';
+  btn.style.background = 'var(--teal-dk)';
+}
+</script>
+
+</body>
+</html>
