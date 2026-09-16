@@ -71,6 +71,14 @@ body{background:#fff;color:#1a2332;font-family:'DM Sans',system-ui,sans-serif;-w
 .accent-stripe{height:3px;background:linear-gradient(90deg,var(--teal-dk),var(--teal),#5dd8e5);}
 .big-footer{background:var(--dark);}
 .footer-top{max-width:1300px;margin:0 auto;padding:48px 48px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;border-bottom:1px solid rgba(255,255,255,.07);}
+.footer-contact{font-size:12px;color:#64748b;margin:2px 0 16px;}
+.footer-contact a{color:#64748b;text-decoration:none;transition:color .2s;}
+.footer-contact a:hover{color:var(--teal-lt);}
+.footer-stats{max-width:1300px;margin:0 auto;padding:24px 48px;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.07);}
+.footer-stat{text-align:center;}
+.fs-num{display:block;font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:700;color:var(--teal-lt);line-height:1;}
+.fs-lbl{display:block;font-size:10.5px;color:#64748b;margin-top:5px;letter-spacing:.03em;text-transform:uppercase;}
+@media(max-width:768px){.footer-stats{gap:26px 32px;padding:20px 24px;}}
 .footer-brand-col img{height:52px;width:auto;object-fit:contain;margin-bottom:12px;}
 .footer-tagline{font-size:13px;color:#64748b;line-height:1.75;max-width:220px;}
 .fc-title{font-size:12px;font-weight:700;color:#e2e8f0;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
@@ -179,9 +187,8 @@ img,svg,video{max-width:100%;height:auto;}
       </div>
     </div>
     <div><div class="fc-title">What we do</div><div class="fc-links"><a href="/service-crm">CRM</a><a href="/service-rpa">AI &amp; Automation</a><a href="/service-funnels">Marketing Automation</a><a href="/service-revops">Sales &amp; Reporting</a></div></div>
-    <div><div class="fc-title">Company</div><div class="fc-links"><a href="/our-approach">Our Approach</a><a href="/who-we-are">Who We Are</a><a href="/insights">Insights</a><a href="/contact">Contact Us</a></div></div>
-    <div><div class="fc-title">Insights</div><div class="fc-links"><a href="/insights">Blog & Articles</a><a href="/#case-studies">Case Studies</a><a href="/insights">Automation Tips</a></div></div>
-    <div><div class="fc-title">Legal</div><div class="fc-links"><a href="/privacy">Privacy Policy</a><a href="/security">Security</a><a href="/terms">Terms of Service</a><a href="/contact">Contact</a></div></div>
+    <div><div class="fc-title">Company</div><div class="fc-links"><a href="/our-approach">Our Approach</a><a href="/who-we-are">Who We Are</a><a href="/insights">Insights</a><a href="/insights/self-running-revenue-engine">Case Studies</a><a href="/contact">Contact Us</a></div></div>
+    <div><div class="fc-title">Legal</div><div class="fc-links"><a href="/privacy">Privacy Policy</a><a href="/security">Security</a><a href="/terms">Terms of Service</a></div></div>
   </div>
   <div class="footer-stats">
     <div class="footer-stat"><span class="fs-num">5+</span><span class="fs-lbl">Years Experience</span></div>
